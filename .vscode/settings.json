@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Maze_Runner.sln"
+    "dotnet.defaultSolution": "Maze_Runner.sln",
+    "git.ignoreLimitWarning": true
 }
