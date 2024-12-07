@@ -164,18 +164,14 @@ public class MazeGenerator : MonoBehaviour
 
         // Marca la celda de salida (esquina inferior derecha)
         // ****** [poner para que la salida se genere en la ultima fila y cualquier columna]
-         
+
         MazeCell exit = _MazeGrid[_MazeWidth - 1, _MazeDepth - 1];
         exit.ClearFronttWall(); // Abre la pared frontal para marcar la salida.
 
         // Cambia la apariencia visual de la entrada y salida
-        var entranceRenderer = entrance.GetComponent<Renderer>();
-        if (entranceRenderer != null)
-            entranceRenderer.material.color = Color.black; // Marca la entrada en verde.
+        entrance.ChangeColor(Color.yellow); // Marca la entrada en amarillo.
 
-        var exitRenderer = exit.GetComponent<Renderer>();
-        if (exitRenderer != null)
-            exitRenderer.material.color = Color.yellow; // Marca la salida en rojo.
+        exit.ChangeColor(Color.blue); // Marca la salida en azul.
     }
     private bool IsPathValid()
     {
