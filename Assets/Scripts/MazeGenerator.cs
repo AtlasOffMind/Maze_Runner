@@ -21,6 +21,8 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private MazeCell[,] _MazeGrid;
 
+
+
     // Método Start que se ejecuta al iniciar el juego.
     void Start()
     {
@@ -39,6 +41,40 @@ public class MazeGenerator : MonoBehaviour
 
         // Llama al método para generar el laberinto comenzando desde la celda en la esquina superior izquierda.
         GenerateMaze(null, _MazeGrid[0, 0]);
+
+        //Este for esta exclusivamente creado para poner aleatoriamente las trampas en el juego.
+        for (int x = 2; x < _MazeWidth - 2; x++)
+        {
+            for (int z = 2; z < _MazeDepth - 2; z++)
+            {
+                int TrapNum = Random.Range(0, 100); //
+                MazeCell temp = _MazeGrid[x, z];
+
+                if (TrapNum > 20 && TrapNum < 25)
+                {
+                    temp._NormalFloor.SetActive(false);
+                    temp._GreenSpike.SetActive(true);
+                    temp.HasATrap= true; 
+                }
+                else if (TrapNum > 40 && TrapNum < 45)
+                {
+                    temp._NormalFloor.SetActive(false);
+                    temp._VioletHole.SetActive(true); 
+                    temp.HasATrap= true; 
+                }
+                else if (TrapNum > 60 && TrapNum < 65)
+                {
+                    temp._NormalFloor.SetActive(false);
+                    temp._InvisibleTrap.SetActive(true);
+                    temp.HasATrap= true; 
+                }
+
+                //Aqui les estoy(pretendo) poniendo a las etiquetas para identificar las celdas de TRAMPAS. *****************************
+                //if (temp._InvisibleTrap == true)
+                //_MazeGrid[x,z].tag = "Trap";
+            }
+        }
+
 
         SetEntranceAndExit();
 
@@ -158,20 +194,41 @@ public class MazeGenerator : MonoBehaviour
 
     private void SetEntranceAndExit()
     {
-        // Marca la celda de entrada (esquina superior izquierda)
-        MazeCell entrance = _MazeGrid[0, 0];
-        //entrance.ClearBackWall(); // Abre la pared trasera para marcar la entrada (o cualquier otra pared que prefieras).
+        // Esto es una lista que guarda las posiciones de las entradas. 
+        List<MazeCell> entrance = new List<MazeCell>();
+        entrance.Add(_MazeGrid[0, 0]);
+        entrance.Add(_MazeGrid[_MazeWidth - 1, 0]);
+        entrance.Add(_MazeGrid[0, _MazeDepth - 1]);
+        entrance.Add(_MazeGrid[_MazeWidth - 1, _MazeDepth - 1]);
 
-        // Marca la celda de salida (esquina inferior derecha)
-        // ****** [poner para que la salida se genere en la ultima fila y cualquier columna]
-
-        MazeCell exit = _MazeGrid[_MazeWidth - 1, _MazeDepth - 1];
-        exit.ClearFronttWall(); // Abre la pared frontal para marcar la salida.
+        // Esto es una lista que guarda las posiciones de las salidas. 
+        List<MazeCell> exit = new List<MazeCell>();
+        exit.Add(_MazeGrid[(_MazeWidth - 1) / 2, (_MazeDepth - 1) / 2]);
+        exit.Add(_MazeGrid[((_MazeWidth - 1) / 2) + 1, (_MazeDepth - 1) / 2]);
+        exit.Add(_MazeGrid[(_MazeWidth - 1) / 2, ((_MazeDepth - 1) / 2) + 1]);
+        exit.Add(_MazeGrid[((_MazeWidth - 1) / 2) + 1, ((_MazeDepth - 1) / 2) + 1]);
 
         // Cambia la apariencia visual de la entrada y salida
-        entrance.ChangeColor(Color.yellow); // Marca la entrada en amarillo.
+        for (int i = 0; i < 4; i++)
+        {
+            entrance[i].ChangeColor(Color.grey); // Marca las entradas en gris.
 
-        exit.ChangeColor(Color.blue); // Marca la salida en azul.
+            //Aqui les estoy(pretendo) poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
+            entrance[i].tag = "Entrance";
+            exit[i].tag = "Exit";
+
+            exit[i].ChangeColor(Color.black);// Marca la salida en negro.
+            exit[i]._GreenSpike.SetActive(false);
+            exit[i]._InvisibleTrap.SetActive(false);
+            exit[i]._VioletHole.SetActive(false);
+            exit[i]._NormalFloor.SetActive(true);// puse esto xq me estaba dando un error donde no se generaba el piso.
+
+            //Llamadas a los metodos Clear para eliminar las paredes del centro de la salida.
+            exit[i].ClearBackWall();
+            exit[i].ClearRigthtWall();
+            exit[i].ClearFronttWall();
+            exit[i].ClearLeftWall();
+        }
     }
     private bool IsPathValid()
     {
@@ -206,6 +263,7 @@ public class MazeGenerator : MonoBehaviour
     {
         int x = (int)currentCell.transform.position.x;
         int z = (int)currentCell.transform.position.z;
+
 
         // Comprueba las celdas vecinas y verifica si están conectadas.
         if (x + 1 < _MazeWidth && !_MazeGrid[x, z].HasRigthWall())

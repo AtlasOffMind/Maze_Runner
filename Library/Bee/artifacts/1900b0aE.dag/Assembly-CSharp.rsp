@@ -391,6 +391,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2023.2.12f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/MazeCell.cs"
 "Assets/Scripts/MazeGenerator.cs"
+"Assets/Scripts/Traps.cs"
 -langversion:9.0
 
 /deterministic
