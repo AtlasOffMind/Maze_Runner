@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace MazeRunner
 {
@@ -11,6 +13,12 @@ namespace MazeRunner
         // Prefab de la celda del laberinto, usado para instanciar las celdas en el juego.
         [SerializeField]
         private MazeCell _MazeCellPrefab;
+
+        [SerializeField]
+        private Player[] _PlayerPrefab = new Player[4];
+
+        [SerializeField]
+        private List<Player> _PlayerListPrefab { get; set; }
 
         // Filas del laberinto en número de celdas.
         [SerializeField]
@@ -23,10 +31,9 @@ namespace MazeRunner
         // Matriz que representa la estructura del laberinto.
         [SerializeField]
         private MazeCell[,] _MazeGrid;
-
         public List<MazeCell> entrance = new List<MazeCell>();
-        public List<MazeCell> exit = new List<MazeCell>();
-
+        private List<MazeCell> exit = new List<MazeCell>();
+        private int playernumber = 0;
 
         // Método Start que se ejecuta al iniciar el juego.
         void Start()
@@ -41,17 +48,18 @@ namespace MazeRunner
                 {
                     // Instancia una nueva celda del laberinto en la posición (x, z).
                     _MazeGrid[x, z] = Instantiate(_MazeCellPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                    _MazeGrid[x, z].gameObject.name = "MazeCell [" + x + "," + z + "]";
                 }
             }
 
             // Llama al método para generar el laberinto comenzando desde la celda en la esquina superior izquierda.
             GenerateMaze(null, _MazeGrid[0, 0]);
 
+            SetEntranceAndExit();
             PuttingTramps();
 
-            SetEntranceAndExit();
+            PlacingPlayer();
 
-            CreatePath();
 
         }
 
@@ -163,28 +171,6 @@ namespace MazeRunner
         private void SetEntranceAndExit()
         {
             // Esto es una lista que guarda las posiciones de las entradas. 
-
-            /*Esto es lo q habia escrito para generar aleatoriamente las entradas.
-            List<MazeCell> entrance1 = new List<MazeCell>();
-            List<MazeCell> entrance2 = new List<MazeCell>();
-            List<MazeCell> entrance3 = new List<MazeCell>();
-            List<MazeCell> entrance4 = new List<MazeCell>();
-            for (int x = 0; x < _MazeWidth - 1; x++)
-            {
-                entrance3.Add(_MazeGrid[x, 0]);
-                entrance4.Add(_MazeGrid[x, _MazeDepth - 1]);
-            }
-            for (int z = 0; z < _MazeDepth - 1; z++)
-            {
-                entrance1.Add(_MazeGrid[0, z]);
-                entrance2.Add(_MazeGrid[_MazeWidth - 1, z]);
-            }
-            int pointer = Random.Range(0, 0);
-            entrance1[pointer].ChangeColor(Color.grey);
-            entrance2[pointer].ChangeColor(Color.grey);
-            entrance3[pointer].ChangeColor(Color.grey);
-            entrance4[pointer].ChangeColor(Color.grey);*/
-
             entrance.Add(_MazeGrid[0, 0]);
             entrance.Add(_MazeGrid[_MazeWidth - 1, 0]);
             entrance.Add(_MazeGrid[0, _MazeDepth - 1]);
@@ -201,14 +187,11 @@ namespace MazeRunner
             {
                 entrance[i].ChangeColor(Color.grey); // Marca las entradas en gris.
 
-                //Aqui les estoy(pretendo) poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
-                //entrance[i].tag = "Entrance";
+                //Aqui les estoy poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
+                entrance[i].tag = "Entrance";
                 exit[i].tag = "Exit";
 
                 exit[i].ChangeColor(Color.black);// Marca la salida en negro.
-                exit[i]._GreenSpike.SetActive(false);
-                exit[i]._InvisibleTrap.SetActive(false);
-                exit[i]._VioletHole.SetActive(false);
                 exit[i]._NormalFloor.SetActive(true);// puse esto xq me estaba dando un error donde no se generaba el piso.
 
                 //Llamadas a los metodos Clear para eliminar las paredes del centro de la salida.
@@ -227,6 +210,8 @@ namespace MazeRunner
             {
                 for (int z = 2; z < _MazeDepth - 2; z++)
                 {
+                    if (_MazeGrid[x, z].CompareTag("Exit")) continue;
+
                     int TrapNum = Random.Range(0, 100); //
                     MazeCell temp = _MazeGrid[x, z];
 
@@ -234,89 +219,91 @@ namespace MazeRunner
                     {
                         temp._NormalFloor.SetActive(false);
                         temp._GreenSpike.SetActive(true);
-                        temp.HasATrap = true;
+
+                        temp._GreenSpike.tag = "GreenTrap";
                     }
                     else if (TrapNum > 40 && TrapNum < 45)
                     {
                         temp._NormalFloor.SetActive(false);
                         temp._VioletHole.SetActive(true);
-                        temp.HasATrap = true;
+
+                        temp._VioletHole.tag = "VioletTrap";
                     }
                     else if (TrapNum > 60 && TrapNum < 65)
                     {
                         temp._NormalFloor.SetActive(false);
                         temp._InvisibleTrap.SetActive(true);
-                        temp.HasATrap = true;
+
+                        temp._InvisibleTrap.tag = "InvisibleTrap";
                     }
                 }
-
-                //Aqui les estoy(pretendo) poniendo a las etiquetas para identificar las celdas de TRAMPAS. *****************************
-                //if (temp._InvisibleTrap == true)
-                //_MazeGrid[x,z].tag = "Trap";
             }
         }
 
-        private void CreatePath()
+        private void PlacingPlayer()
         {
-            for (int x = 0; x < _MazeWidth - 1; x++)
-            {
-                for (int z = 0; z < _MazeDepth - 1; z++)
-                {
-                    _MazeGrid[x, z].IsVisited = false;
-                }
-            }
+            Color[] colors = { Color.white, Color.cyan, Color.magenta, Color.green };
 
+            _PlayerListPrefab = new List<Player>();
+
+            List<Vector3> entrancePositions = new List<Vector3>();
+
+            //float fallHeight = 10f;
+            float positionY = 0.3f;
+            //entrance.Count
+
+            for (int i = 0; i < 1; i++)
+            {
+                _PlayerListPrefab.Add(_PlayerPrefab[i]);
+
+                _PlayerListPrefab[i].GettingSetting();
+                _PlayerListPrefab[i].tag = "Player" + i.ToString();
+
+                entrancePositions.Add(entrance[i].transform.position);
+
+                _PlayerListPrefab[i].Freeze();
+                Instantiate(_PlayerListPrefab[i], new Vector3(entrancePositions[i].x, entrancePositions[i].y + positionY, entrancePositions[i].z), Quaternion.identity).gameObject.name = "Player " + playernumber++;
+            }
+        }
+
+        public List<MazeCell> GetEntrance() => entrance;
+        public List<MazeCell> GetExit() => exit;
+        public MazeCell[,] GetMatrix() => _MazeGrid;
+        public void Print()
+        {
             for (int i = 0; i < 4; i++)
             {
-                FindPath(entrance[i]);
+                Debug.Log(entrance[i].transform.position);
             }
-
-        }
-        private bool FindPath(MazeCell currentCell)
-        {
-            // Marcar celda como visitada
-            currentCell.Visit();
-
-            // Comprobar si la celda actual es la salida
-            if (exit.Contains(currentCell))
-            {
-                return true;
-            }
-
-            // Obtener celdas vecinas accesibles
-            var neighbors = GetAccessibleNeighbors(currentCell);
-
-            foreach (var neighbor in neighbors)
-            {
-                // Si el vecino no ha sido visitado, recursivamente intentar encontrar la salida
-                if (!neighbor.IsVisited && FindPath(neighbor))
-                {
-                    return true;
-                }
-            }
-
-            // Si ninguna opción lleva a la salida, retrocede
-            return false;
         }
 
-        private IEnumerable<MazeCell> GetAccessibleNeighbors(MazeCell currentCell)
-        {
-            int x = (int)currentCell.transform.position.x;
-            int z = (int)currentCell.transform.position.z;
+        private void SetRandomEntrance()
+        {//Esto es lo q habia escrito para generar aleatoriamente las entradas.
+            List<MazeCell> entrance1 = new List<MazeCell>();
+            List<MazeCell> entrance2 = new List<MazeCell>();
+            List<MazeCell> entrance3 = new List<MazeCell>();
+            List<MazeCell> entrance4 = new List<MazeCell>();
 
+            for (int x = 0; x < _MazeWidth - 1; x++)
+            {
+                entrance3.Add(_MazeGrid[x, 0]);
+                entrance4.Add(_MazeGrid[x, _MazeDepth - 1]);
+            }
+            for (int z = 0; z < _MazeDepth - 1; z++)
+            {
+                entrance1.Add(_MazeGrid[0, z]);
+                entrance2.Add(_MazeGrid[_MazeWidth - 1, z]);
+            }
 
-            // Comprueba las celdas vecinas y verifica si están conectadas.
-            if (x + 1 < _MazeWidth && !_MazeGrid[x, z].HasRigthWall())
-                yield return _MazeGrid[x + 1, z];
+            int random1 = Random.Range(0, 29);
+            int random2 = Random.Range(0, 29);
+            int random3 = Random.Range(0, 29);
+            int random4 = Random.Range(0, 29);
 
-            if (x - 1 >= 0 && !_MazeGrid[x, z].HasLeftWall())
-                yield return _MazeGrid[x - 1, z];
-
-            if (z + 1 < _MazeDepth && !_MazeGrid[x, z].HasFrontWall())
-                yield return _MazeGrid[x, z + 1];
-
-            if (z - 1 >= 0 && !_MazeGrid[x, z].HasBackWall())
-                yield return _MazeGrid[x, z - 1];
+            entrance.Add(entrance1[random1]);
+            entrance.Add(entrance2[random2]);
+            entrance.Add(entrance3[random3]);
+            entrance.Add(entrance4[random4]);
         }
     }
 }

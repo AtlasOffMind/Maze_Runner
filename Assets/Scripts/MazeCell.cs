@@ -12,10 +12,10 @@ namespace MazeRunner
         private GameObject _LeftWall; // Representa la pared izquierda de la celda del laberinto.
 
         [SerializeField]
-        private GameObject _RigthtWall; // Representa la pared derecha de la celda del laberinto. (Nota: "Rigtht" está mal escrito, debería ser "RightWall").
+        private GameObject _RigthtWall; // Representa la pared derecha de la celda del laberinto. (esta mal escrito pero x alguna casualidad si lo cambio ya no funciona).
 
         [SerializeField]
-        private GameObject _FronttWall; // Representa la pared frontal de la celda del laberinto. (Nota: "Frontt" también está mal escrito, debería ser "FrontWall").
+        private GameObject _FronttWall; // Representa la pared frontal de la celda del laberinto. (esta mal escrito pero x alguna casualidad si lo cambio ya no funciona).
 
         [SerializeField]
         private GameObject _BackWall; // Representa la pared trasera de la celda del laberinto.
@@ -35,8 +35,6 @@ namespace MazeRunner
         [SerializeField]
         public GameObject _InvisibleTrap;
 
-        public bool HasATrap = false;
-
         // Propiedad pública de solo lectura que indica si la celda ha sido visitada.
         public bool IsVisited; //{ get; public set; }
 
@@ -45,7 +43,6 @@ namespace MazeRunner
         Renderer LeftWallrender;
         Renderer RightWallrender;
         Renderer NormalFloorrenderer;
-
 
 
         // Método público para marcar la celda como visitada.
@@ -66,6 +63,7 @@ namespace MazeRunner
             RightWallrender = _RigthtWall.GetComponentInChildren<Renderer>();
             NormalFloorrenderer = _NormalFloor.GetComponentInChildren<Renderer>();
         }
+
 
         // Métodos públicos para eliminar paredes individuales, probablemente usados para abrir caminos en el laberinto.
 

@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765972116966843320}
   - component: {fileID: 3472242493646278430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'FrontWall '
   m_TagString: 'FrontWall '
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7123168616226655060}
   - component: {fileID: 8479593763116023479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'RigthWall '
   m_TagString: 'RigthWall '
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 181538033775005904}
   - component: {fileID: 2621128080216514213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenFloor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 943530268579788662}
   - component: {fileID: 4750105436454265663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InvisiblesFloor (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5921799223538914860}
   - component: {fileID: 4899308699204403916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VioletFloor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6950591258428224072}
   - component: {fileID: 8055091964986498889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackWall
   m_TagString: BackWall
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9198786035530966324}
   - component: {fileID: 471720076189610385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftWall
   m_TagString: LeftWall
   m_Icon: {fileID: 0}
@@ -952,7 +952,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718041369286769151}
   - component: {fileID: 2260803636759301253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NormalFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,6 +1058,8 @@ MonoBehaviour:
   _GreenSpike: {fileID: 3799362316293009340}
   _VioletHole: {fileID: 4956528285188710823}
   _InvisibleTrap: {fileID: 4794014522368309577}
+  HasATrap: 0
+  IsVisited: 0
 --- !u!1 &7262191300485108069
 GameObject:
   m_ObjectHideFlags: 0
