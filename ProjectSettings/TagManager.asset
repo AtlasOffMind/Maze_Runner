@@ -8,6 +8,15 @@ TagManager:
   - 'RigthWall '
   - 'FrontWall '
   - BackWall
+  - Exit
+  - Entrance
+  - GreenTrap
+  - VioletTrap
+  - InvisibleTrap
+  - Player0
+  - Player1
+  - Player2
+  - Player3
   layers:
   - Default
   - TransparentFX
@@ -15,9 +24,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Wall
+  - Floor
+  - Player
   - 
   - 
   - 
