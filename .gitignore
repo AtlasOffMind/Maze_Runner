@@ -1,6 +1,6 @@
 [Llibraries]
-/Temp
-/Library
+Temp/
+Library/
 Obj/
 Logs/
 MemoryCaptures/
