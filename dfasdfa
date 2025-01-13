@@ -1,0 +1,38 @@
+[33mc9b46bbc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: commit: Updating gitignore File
+[33mf81f8f55[m HEAD@{1}: commit: update
+[33m2ae3bf23[m HEAD@{2}: commit: gitignore actualization
+[33mfbd230fa[m HEAD@{3}: commit (merge): Merge remote-tracking branch 'origin/main'
+[33m2cf18d6e[m HEAD@{4}: checkout: moving from main to main
+[33m2cf18d6e[m HEAD@{5}: rebase (abort): returning to refs/heads/main
+[33mccd64432[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{6}: rebase (start): checkout origin/main
+[33m2cf18d6e[m HEAD@{7}: reset: moving to HEAD
+[33m2cf18d6e[m HEAD@{8}: checkout: moving from main to main
+[33m2cf18d6e[m HEAD@{9}: checkout: moving from 52a09761d2c24c24896151d800d63ca539931fa6 to main
+[33m52a09761[m HEAD@{10}: checkout: moving from main to 52a09761d2c24c24896151d800d63ca539931fa6
+[33m2cf18d6e[m HEAD@{11}: checkout: moving from main to main
+[33m2cf18d6e[m HEAD@{12}: checkout: moving from main to main
+[33m2cf18d6e[m HEAD@{13}: checkout: moving from main to main
+[33m2cf18d6e[m HEAD@{14}: commit: 4.2 Version
+[33m34fa5b20[m HEAD@{15}: commit: 4.1 Version
+[33m87d405a4[m HEAD@{16}: commit: 4 0 Version
+[33m3a57202f[m HEAD@{17}: reset: moving to 3a57202f
+[33mb8d969c3[m HEAD@{18}: commit: 4.0*
+[33m07a55fe7[m HEAD@{19}: commit: 3.9*
+[33m3a57202f[m HEAD@{20}: commit: 3.9 Version
+[33m678bfd62[m HEAD@{21}: commit: 3.8 Version
+[33me71b5793[m HEAD@{22}: commit: 3.7 Version
+[33mf0f90345[m HEAD@{23}: commit: 3.6 Version
+[33mcaf1d83a[m HEAD@{24}: commit: 3.5 Version
+[33mb2f5c1cc[m HEAD@{25}: commit: 3.4 Version
+[33m52a09761[m HEAD@{26}: Branch: renamed refs/heads/main to refs/heads/main
+[33m52a09761[m HEAD@{28}: Branch: renamed refs/heads/main to refs/heads/main
+[33m52a09761[m HEAD@{30}: Branch: renamed refs/heads/main to refs/heads/main
+[33m52a09761[m HEAD@{32}: commit: 3.3 Commit
+[33md35ec549[m HEAD@{33}: commit: 3.2 Commit
+[33mc4c1d6af[m HEAD@{34}: commit: 3.1 commit
+[33m8262ab86[m HEAD@{35}: commit: 3.1 commit
+[33m3b994b2d[m HEAD@{36}: commit: "Third Commit"
+[33m556cf323[m HEAD@{37}: Branch: renamed refs/heads/main to refs/heads/main
+[33m556cf323[m HEAD@{39}: Branch: renamed refs/heads/main to refs/heads/main
+[33m556cf323[m HEAD@{41}: Branch: renamed refs/heads/main to refs/heads/main
+[33m556cf323[m HEAD@{43}: commit (initial): Second Comit
