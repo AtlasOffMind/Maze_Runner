@@ -1,7 +1,6 @@
-Assets/Scripts/MazeCell.cs
 [Llibraries]
-Temp/
-Library/
+/Temp
+/Library
 Obj/
 Logs/
 MemoryCaptures/
