@@ -30,34 +30,6 @@ public class Copycat : Ability
         GSC.button2.onClick.AddListener(SelectSecondOption);
         GSC.button3.onClick.AddListener(SelectThirdOption);
     }
-    public override void Fast()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            copiedAbility = posibleTargets[0].GetComponent<AbilityHolder>().ability;
-            Debug.Log("Ahora CopiedAbility es " + copiedAbility.name);
-
-            SetOn(false);
-            Debug.Log(isOn);
-            temp.GetComponent<AbilityHolder>().SaveAbility(temp.GetComponent<AbilityHolder>().ability, copiedAbility);
-
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            copiedAbility = posibleTargets[1].GetComponent<AbilityHolder>().ability;
-            Debug.Log("Ahora CopiedAbility es " + copiedAbility.name);
-            SetOn(false);
-            Debug.Log(isOn);
-            temp.GetComponent<AbilityHolder>().SaveAbility(temp.GetComponent<AbilityHolder>().ability, copiedAbility);
-
-        }
-        /*if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            copiedAbility = posibleTargets[3].GetComponent<AbilityHolder>().ability;
-            Debug.Log("Ahora CopiedAbility = " + copiedAbility.name);
-            SetOn(false);
-        }*/
-    }
     private void SelectFirstOption()
     {
         copiedAbility = posibleTargets[0].GetComponent<AbilityHolder>().ability;

@@ -32,6 +32,7 @@ namespace MazeRunner
         {
             Gamestatuscontroller = this;
             TMtemp = FindFirstObjectByType<TurnManagement>();
+            _abilitySelectionPanel.SetActive(false);
         }
 
         void Update()
