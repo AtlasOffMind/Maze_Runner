@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 545593314500219484}
   - component: {fileID: 2743122671599155507}
   - component: {fileID: 3083377432904573831}
-  - component: {fileID: 9132256979930124499}
-  - component: {fileID: 6789403703621642601}
   - component: {fileID: 5434998293343352848}
+  - component: {fileID: 6789403703621642601}
   m_Layer: 8
   m_Name: player 1
-  m_TagString: Player0
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6557862001858284285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 29, y: 0.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140,43 +139,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &9132256979930124499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557862001858284285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c232361d1be3894c8d20e2e064c3d58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _PlayerPrefab: {fileID: 6789403703621642601}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!114 &6789403703621642601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557862001858284285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50edf428bcbe2a248bf3a1dc8d53fc4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  steps: 100
-  _Player: {fileID: 6557862001858284285}
-  lifePionts: 1
 --- !u!143 &5434998293343352848
 CharacterController:
   m_ObjectHideFlags: 0
@@ -203,3 +165,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6789403703621642601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6557862001858284285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50edf428bcbe2a248bf3a1dc8d53fc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steps: 100
+  _Player: {fileID: 6557862001858284285}
+  lifePionts: 1
+  inTurn: 0
