@@ -395,6 +395,7 @@
 "Assets/Model/Military/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs"
 "Assets/Scripts/Ability.cs"
 "Assets/Scripts/AbilityHolder.cs"
+"Assets/Scripts/Copycat.cs"
 "Assets/Scripts/Disarmer.cs"
 "Assets/Scripts/GameStatusController.cs"
 "Assets/Scripts/LongWalk.cs"

@@ -23,6 +23,7 @@ namespace MazeRunner
         public void PlayerSelect(List<Player> playerselect)
         {
             mazeGenerator = FindFirstObjectByType<MazeGenerator>();
+
             if (playersInGame == null)
             {
                 playersInGame = playerselect;
@@ -52,6 +53,7 @@ namespace MazeRunner
         }
 
         public Player GetPlayer() => playerTurn;
+        public List<Player> GetPlayersInGame() => playersInGame;
 
         public void EndTurn()
         {
