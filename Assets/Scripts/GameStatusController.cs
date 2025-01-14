@@ -6,8 +6,6 @@ using TMPro;
 
 namespace MazeRunner
 {
-
-
     public class GameStatusController : MonoBehaviour
     {
         Player players;
@@ -16,26 +14,34 @@ namespace MazeRunner
         public TextMeshProUGUI _textStepLeft;
         public TextMeshProUGUI _textTurn;
         public TextMeshProUGUI _textCoolDown;
-
+        public TextMeshProUGUI _textAmount;
+        private TurnManagement TMtemp;
         public static GameStatusController Gamestatuscontroller;
-        private void Awake()
+        private void Start()
         {
-            //players.AddRange(FindObjectsByType());
-            //players = new List<Player>();
-
             Gamestatuscontroller = this;
+            TMtemp = FindFirstObjectByType<TurnManagement>();
         }
-
 
         void Update()
         {
-            if(players == null)
-            players = FindAnyObjectByType<Player>();
-
-            if (_textLifePoints != null && _textStepLeft != null && _textTurn != null)
+            players = TMtemp.GetPlayer();
+            if (_textLifePoints != null && _textStepLeft != null && _textTurn != null && _textCoolDown != null)
             {
-                _textLifePoints.text = "Life Points: " + players.lifePionts;
+                _textLifePoints.text = "Life Points: " + players.lifePoints;
                 _textStepLeft.text = "Steps left: " + players.steps;
+                _textTurn.text = "Turn: " + players.gameObject.name;
+                _textCoolDown.text = "CoolDown: Turns left " + players.CoolDown;
+
+
+                if (players.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer" || players.gameObject.GetComponent<AbilityHolder>().ability == null)
+                { _textAmount.gameObject.SetActive(false); }
+                if (players.gameObject.GetComponent<AbilityHolder>().ability.name == "Disarmer" || players.gameObject.GetComponent<AbilityHolder>().ability == null)
+                {
+                    _textAmount.text = "Amount: " + players.amount;
+                    _textAmount.gameObject.SetActive(true);
+
+                }
 
             }
 

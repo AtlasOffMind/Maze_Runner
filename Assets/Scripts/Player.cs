@@ -7,30 +7,19 @@ namespace MazeRunner
     public class Player : MonoBehaviour
     {
         // Atributos básicos del jugador
-        public int steps;
         public GameObject _Player;
-        Renderer playerRenderer;
-        Rigidbody playerRestrictions;
-        public int lifePionts;
-
+        public int steps;
+        public int lifePoints;
+        public int CoolDown;
+        public bool inTurn;
+        public int  penaltyTurn;
+         public int amount;
 
         public void GettingSetting()
         {
-            playerRestrictions = GetComponent<Rigidbody>();
+            inTurn = false;
+            if (penaltyTurn != 0) penaltyTurn = 0;
+
         }
-
-        public void Freeze()
-        {
-            playerRestrictions.constraints = RigidbodyConstraints.FreezeAll;
-        }
-        public void UnFreeze() { playerRestrictions.constraints = RigidbodyConstraints.None; }
-
-        public void ChangeColorPlayer(Color newColor)
-        {
-            playerRenderer = _Player.GetComponent<Renderer>();
-
-            playerRenderer.material.color = newColor;
-        }
-
     }
 }

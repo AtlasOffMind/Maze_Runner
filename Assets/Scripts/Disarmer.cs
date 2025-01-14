@@ -22,6 +22,11 @@ public class Disarmer : Ability
         player.amount = amount;
         isActive = true;
         List<MazeCell> tempCell = new List<MazeCell>();
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 25e17007b4672106cb6948085f4342a9dd8c3e02
     }
 
     public override void Fast()

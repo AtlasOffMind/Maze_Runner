@@ -15,10 +15,9 @@ namespace MazeRunner
         private MazeCell _MazeCellPrefab;
 
         [SerializeField]
-        private Player[] _PlayerPrefab = new Player[4];
+        public Player[] _PlayerPrefab = new Player[5];
 
-        [SerializeField]
-        private List<Player> _PlayerListPrefab { get; set; }
+        private List<Player> _PlayerListPrefab;
 
         // Filas del laberinto en número de celdas.
         [SerializeField]
@@ -28,18 +27,23 @@ namespace MazeRunner
         [SerializeField]
         private int _MazeDepth;
 
+        [SerializeField]
+        public int numberOfPlayers;
+
         // Matriz que representa la estructura del laberinto.
         [SerializeField]
         private MazeCell[,] _MazeGrid;
-        public List<MazeCell> entrance = new List<MazeCell>();
+        private List<MazeCell> entrance = new List<MazeCell>();
         private List<MazeCell> exit = new List<MazeCell>();
-        private int playernumber = 0;
+        private TurnManagement TM;
 
         // Método Start que se ejecuta al iniciar el juego.
         void Start()
         {
             // Inicializa la matriz que representará la cuadrícula del laberinto.
             _MazeGrid = new MazeCell[_MazeWidth, _MazeDepth];
+            _PlayerListPrefab = new List<Player>();
+            TM = FindFirstObjectByType<TurnManagement>();
 
             // Bucle doble para instanciar cada celda en la cuadrícula del laberinto.
             for (int x = 0; x < _MazeWidth; x++)
@@ -56,11 +60,18 @@ namespace MazeRunner
             GenerateMaze(null, _MazeGrid[0, 0]);
 
             SetEntranceAndExit();
+
+            Traps.Iniciate();
+
             PuttingTramps();
 
-            PlacingPlayer();
+            if (numberOfPlayers >= 1 && numberOfPlayers <= 4) PlacingPlayer();
+            else if (numberOfPlayers < 1) { numberOfPlayers = 1; PlacingPlayer(); }
+            else { numberOfPlayers = 4; PlacingPlayer(); }
 
+            TM.PlayerSelect(GetPlayers());
 
+            Traps.Print();
         }
 
         // Método recursivo para generar el laberinto.
@@ -170,6 +181,8 @@ namespace MazeRunner
 
         private void SetEntranceAndExit()
         {
+            List<BoxCollider> colliders = new List<BoxCollider>();
+
             // Esto es una lista que guarda las posiciones de las entradas. 
             entrance.Add(_MazeGrid[0, 0]);
             entrance.Add(_MazeGrid[_MazeWidth - 1, 0]);
@@ -182,6 +195,7 @@ namespace MazeRunner
             exit.Add(_MazeGrid[(_MazeWidth - 1) / 2, ((_MazeDepth - 1) / 2) + 1]);
             exit.Add(_MazeGrid[((_MazeWidth - 1) / 2) + 1, ((_MazeDepth - 1) / 2) + 1]);
 
+
             // Cambia la apariencia visual de la entrada y salida
             for (int i = 0; i < 4; i++)
             {
@@ -190,6 +204,7 @@ namespace MazeRunner
                 //Aqui les estoy poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
                 entrance[i].tag = "Entrance";
                 exit[i].tag = "Exit";
+                exit[i].gameObject.name = "Salida [" + (int)exit[i].transform.position.x + "," + (int)exit[i].transform.position.z + "]";
 
                 exit[i].ChangeColor(Color.black);// Marca la salida en negro.
                 exit[i]._NormalFloor.SetActive(true);// puse esto xq me estaba dando un error donde no se generaba el piso.
@@ -199,6 +214,9 @@ namespace MazeRunner
                 exit[i].ClearRigthtWall();
                 exit[i].ClearFronttWall();
                 exit[i].ClearLeftWall();
+
+                colliders.Add(exit[i].gameObject.GetComponentInChildren<BoxCollider>());
+                colliders[i].isTrigger = true;
             }
 
         }
@@ -221,6 +239,7 @@ namespace MazeRunner
                         temp._GreenSpike.SetActive(true);
 
                         temp._GreenSpike.tag = "GreenTrap";
+                        Traps.Save(temp);
                     }
                     else if (TrapNum > 40 && TrapNum < 45)
                     {
@@ -228,6 +247,7 @@ namespace MazeRunner
                         temp._VioletHole.SetActive(true);
 
                         temp._VioletHole.tag = "VioletTrap";
+                        Traps.Save(temp);
                     }
                     else if (TrapNum > 60 && TrapNum < 65)
                     {
@@ -235,6 +255,7 @@ namespace MazeRunner
                         temp._InvisibleTrap.SetActive(true);
 
                         temp._InvisibleTrap.tag = "InvisibleTrap";
+                        Traps.Save(temp);
                     }
                 }
             }
@@ -242,40 +263,30 @@ namespace MazeRunner
 
         private void PlacingPlayer()
         {
-            Color[] colors = { Color.white, Color.cyan, Color.magenta, Color.green };
-
             _PlayerListPrefab = new List<Player>();
 
             List<Vector3> entrancePositions = new List<Vector3>();
 
             //float fallHeight = 10f;
-            float positionY = 0.3f;
-            //entrance.Count
+            //float positionY = 0.3f;
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < numberOfPlayers; i++)
             {
+                entrancePositions.Add(entrance[i].transform.position);
+                _PlayerPrefab[i].transform.SetPositionAndRotation(new Vector3(entrancePositions[i].x, _PlayerPrefab[i].transform.position.y, entrancePositions[i].z), _PlayerPrefab[i].transform.rotation);
+
+                _PlayerPrefab[i].gameObject.name = "Player " + i.ToString();
+                _PlayerPrefab[i].tag = "Player" + i.ToString();
+                _PlayerPrefab[i].GettingSetting();
                 _PlayerListPrefab.Add(_PlayerPrefab[i]);
 
-                _PlayerListPrefab[i].GettingSetting();
-                _PlayerListPrefab[i].tag = "Player" + i.ToString();
-
-                entrancePositions.Add(entrance[i].transform.position);
-
-                _PlayerListPrefab[i].Freeze();
-                Instantiate(_PlayerListPrefab[i], new Vector3(entrancePositions[i].x, entrancePositions[i].y + positionY, entrancePositions[i].z), Quaternion.identity).gameObject.name = "Player " + playernumber++;
             }
         }
 
         public List<MazeCell> GetEntrance() => entrance;
         public List<MazeCell> GetExit() => exit;
         public MazeCell[,] GetMatrix() => _MazeGrid;
-        public void Print()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                Debug.Log(entrance[i].transform.position);
-            }
-        }
+        public List<Player> GetPlayers() => _PlayerListPrefab;
 
         private void SetRandomEntrance()
         {//Esto es lo q habia escrito para generar aleatoriamente las entradas.

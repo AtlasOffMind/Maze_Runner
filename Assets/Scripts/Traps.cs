@@ -9,16 +9,77 @@ namespace MazeRunner
 {
     public static class Traps
     {
-        public static void TrapIsActive(Player _PlayerPrefab,MazeCell currentCell)
+        public static List<MazeCell> VioletTrap;
+        public static List<MazeCell> InvisibleTrap;
+        public static List<MazeCell> GreenTrap;
+
+        private static MazeCell[,] MazeGrid;
+        private static MazeGenerator mazeGenerator;
+        private static TurnManagement TM;
+
+
+
+        public static void Iniciate()
         {
-            if (HasTheTrap(currentCell))
-            _PlayerPrefab.lifePionts--;
-            
+            mazeGenerator = UnityEngine.MonoBehaviour.FindFirstObjectByType<MazeGenerator>();
+            MazeGrid = mazeGenerator.GetMatrix();
+
+            TM = UnityEngine.MonoBehaviour.FindFirstObjectByType<TurnManagement>();
+
+            VioletTrap = new List<MazeCell>();
+            InvisibleTrap = new List<MazeCell>();
+            GreenTrap = new List<MazeCell>();
         }
-        private static bool HasTheTrap(MazeCell currentCell)
+
+        public static void Save(MazeCell cell)
         {
-            if (currentCell._VioletHole.CompareTag("VioletTrap") || currentCell._InvisibleTrap.CompareTag("InvisibleTrap") || currentCell._GreenSpike.CompareTag("GreenTrap")) return true;
-            return false;
+            if (cell._VioletHole.CompareTag("VioletTrap")) VioletTrap.Add(cell);
+
+            if (cell._InvisibleTrap.CompareTag("InvisibleTrap")) InvisibleTrap.Add(cell);
+
+            if (cell._GreenSpike.CompareTag("GreenTrap")) GreenTrap.Add(cell);
+        }
+        public static void TrapIsActive(Player _PlayerPrefab, MazeCell currentCell)
+        {
+            TrapHability(_PlayerPrefab, currentCell);
+        }
+        private static void TrapHability(Player _PlayerPrefab, MazeCell currentCell)
+        {
+            if (currentCell._VioletHole.CompareTag("VioletTrap"))
+            {
+                if (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer" || (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name == "Disarmer" && _PlayerPrefab.amount == 0))
+                {
+                    _PlayerPrefab.penaltyTurn = 3;
+                }
+            }
+            if (currentCell._InvisibleTrap.CompareTag("InvisibleTrap"))
+            {
+                if (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer" || (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name == "Disarmer" && _PlayerPrefab.amount == 0))
+                {
+                    int x = Random.Range(0, 29);
+                    int z = Random.Range(0, 29);
+
+                    if (!InvisibleTrap.Contains(MazeGrid[x, z]) && !VioletTrap.Contains(MazeGrid[x, z]) && !GreenTrap.Contains(MazeGrid[x, z]) && _PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer")
+                    {
+                        _PlayerPrefab.GetComponent<Motion>().StopMovement();
+                        _PlayerPrefab.transform.SetPositionAndRotation(new UnityEngine.Vector3(x, _PlayerPrefab.transform.position.y, z), _PlayerPrefab.transform.rotation);
+                        if (_PlayerPrefab.steps == 0) TM.EndTurn();
+
+                    }
+                    else TrapHability(_PlayerPrefab, currentCell);
+                }
+            }
+            if (currentCell._GreenSpike.CompareTag("GreenTrap") && _PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer")
+            {
+                if (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name != "Disarmer" || (_PlayerPrefab.gameObject.GetComponent<AbilityHolder>().ability.name == "Disarmer" && _PlayerPrefab.amount == 0))
+                    _PlayerPrefab.lifePoints--;
+            }
+        }
+        public static void Print()
+        {
+            Debug.Log("VioletTrap " + VioletTrap[0].name);
+            Debug.Log("InvisibleTrap " + InvisibleTrap[0].name);
+            Debug.Log("GreenTrap " + GreenTrap[0].name);
         }
 
 
