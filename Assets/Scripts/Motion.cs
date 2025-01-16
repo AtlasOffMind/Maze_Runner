@@ -52,7 +52,7 @@ public class Motion : MonoBehaviour
     {
         _CurrentPlayer = TM.GetPlayer();
 
-        if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0 )
+        if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0)
         {
             // Detecta la entrada del jugador para moverse
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) TryMove(Vector3.left);
@@ -60,7 +60,7 @@ public class Motion : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) TryMove(Vector3.back);
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) TryMove(Vector3.forward);
         }
-        if ((_CurrentPlayer.steps == 0 && !isMoving) || (_CurrentPlayer.penaltyTurn != 0 && !isMoving) )
+        if ((_CurrentPlayer.steps == 0 && !isMoving) || (_CurrentPlayer.penaltyTurn != 0 && !isMoving))
         {
             TM.EndTurn(); // Cambia al siguiente jugador cuando se quede sin pasos
             _CurrentPlayer = TM.GetPlayer();
@@ -102,6 +102,7 @@ public class Motion : MonoBehaviour
         {
             UnityEngine.Debug.Log("Hay un jugador en esa casilla");
         }
+
     }
 
     private IEnumerator MoveToTarget()
@@ -135,7 +136,7 @@ public class Motion : MonoBehaviour
         _CurrentPlayer.transform.position = new Vector3(entrance[random].transform.position.x, _CurrentPlayer.transform.position.y, entrance[random].transform.position.z);
         isMoving = false;
     }
-    public void StopMovement() { StopCoroutine(currentMovement);  isMoving = false;}
+    public void StopMovement() { StopCoroutine(currentMovement); isMoving = false; }
 
 
     public MazeCell GetMazeCell(Vector3 targetPosition) => _MazeGrid[(int)targetPosition.x, (int)targetPosition.z];
@@ -144,4 +145,6 @@ public class Motion : MonoBehaviour
     {
         UnityEngine.Debug.Log("Llegaste a la salida");
     }
+
+
 }

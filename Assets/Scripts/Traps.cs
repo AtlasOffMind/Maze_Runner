@@ -76,7 +76,6 @@ namespace MazeRunner
             }
             if (currentCell._GreenSpike.CompareTag("GreenTrap"))
             {
-                Debug.Log("hola");
                 _PlayerPrefab.lifePoints--;
             }
 
