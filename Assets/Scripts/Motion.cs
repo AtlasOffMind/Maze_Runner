@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Xml.Serialization;
 using MazeRunner;
 using UnityEngine;
 
@@ -14,7 +12,7 @@ public class Motion : MonoBehaviour
     public LayerMask wallLayer;// Layer de las paredes para detectar colisiones
     public LayerMask playerLayer;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     private MazeGenerator mazeGenerator;
     private Vector3 targetPosition; // Posición objetivo del jugador
@@ -25,11 +23,8 @@ public class Motion : MonoBehaviour
 
     private int originalLifePoints = 0;
     private List<MazeCell> entrance;
-    //private List<MazeCell> exit;
     private MazeCell[,] _MazeGrid;
-
     private TurnManagement TM;
-
     int lastEntrance = -1;
 
 
@@ -38,8 +33,6 @@ public class Motion : MonoBehaviour
     {
         TM = FindFirstObjectByType<TurnManagement>();
         mazeGenerator = FindFirstObjectByType<MazeGenerator>();
-
-        //exit = mazeGenerator.GetExit();
 
         entrance = mazeGenerator.GetEntrance();
         _MazeGrid = mazeGenerator.GetMatrix();
@@ -55,10 +48,34 @@ public class Motion : MonoBehaviour
         if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0)
         {
             // Detecta la entrada del jugador para moverse
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) TryMove(Vector3.left);
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) TryMove(Vector3.right);
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) TryMove(Vector3.back);
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) TryMove(Vector3.forward);
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                    SpecialTryMove(Vector3.left);
+                else
+                    TryMove(Vector3.left);
+            }
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                    SpecialTryMove(Vector3.right);
+                else
+                    TryMove(Vector3.right);
+            }
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                    SpecialTryMove(Vector3.back);
+                else
+                    TryMove(Vector3.back);
+            }
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                    SpecialTryMove(Vector3.forward);
+                else
+                    TryMove(Vector3.forward);
+            }
         }
         if ((_CurrentPlayer.steps == 0 && !isMoving) || (_CurrentPlayer.penaltyTurn != 0 && !isMoving))
         {
@@ -143,8 +160,26 @@ public class Motion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        UnityEngine.Debug.Log("Llegaste a la salida");
+        Debug.Log("Llegaste a la salida");
     }
 
+    private void SpecialTryMove(Vector3 direction)
+    {
+        targetPosition = _CurrentPlayer.transform.position + direction * moveDistance;
 
+        if ((int)targetPosition.x >= 0 && (int)targetPosition.x <= 29 && (int)targetPosition.z >= 0 && (int)targetPosition.x <= 29)
+        {
+            if (currentMovement != null) StopCoroutine(currentMovement); // Detiene corrutinas previas
+            currentMovement = MoveToTarget(); // Guarda la nueva corrutina
+            StartCoroutine(currentMovement);
+
+            _CurrentPlayer.steps--;
+            _CurrentPlayer.specialSteps--;
+
+            currentCell = GetMazeCell(targetPosition);
+
+            Traps.TrapIsActive(_CurrentPlayer, currentCell);
+        }
+        else Debug.Log("You can't escape out of the maze that easy ;)");
+    }
 }

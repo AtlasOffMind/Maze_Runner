@@ -49,7 +49,7 @@ public class Copycat : Ability
     }
     private void SelectThirdOption()
     {
-        copiedAbility = posibleTargets[3].GetComponent<AbilityHolder>().ability;
+        copiedAbility = posibleTargets[2].GetComponent<AbilityHolder>().ability;
         Debug.Log("Ahora CopiedAbility = " + copiedAbility.name);
         SetOn(false);
         temp.GetComponent<AbilityHolder>().SaveAbility(temp.GetComponent<AbilityHolder>().ability, copiedAbility);

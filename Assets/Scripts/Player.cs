@@ -13,7 +13,9 @@ namespace MazeRunner
         public int CoolDown;
         public bool inTurn;
         public int  penaltyTurn;
-         public int amount;
+        public int amount;
+        public int specialSteps;
+
 
         public void GettingSetting()
         {

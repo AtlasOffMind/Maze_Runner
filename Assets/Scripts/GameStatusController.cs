@@ -11,12 +11,12 @@ namespace MazeRunner
         Player players;
         private List<Player> posibleTargets;
 
-
         public TextMeshProUGUI _textLifePoints;
         public TextMeshProUGUI _textStepLeft;
         public TextMeshProUGUI _textTurn;
         public TextMeshProUGUI _textCoolDown;
         public TextMeshProUGUI _textAmount;
+        public TextMeshProUGUI _textSpecialMovement;
         public TextMeshProUGUI _textbutton1;
         public TextMeshProUGUI _textbutton2;
         public TextMeshProUGUI _textbutton3;
@@ -39,10 +39,10 @@ namespace MazeRunner
         {
             players = TMtemp.GetPlayer();
 
-            if(posibleTargets == null)
-            posibleTargets = TMtemp.GetPlayersInGame();
+            if (posibleTargets == null)
+                posibleTargets = TMtemp.GetPlayersInGame();
 
-            
+
 
             if (_textLifePoints != null && _textStepLeft != null && _textTurn != null && _textCoolDown != null)
             {
@@ -72,6 +72,13 @@ namespace MazeRunner
                 _textbutton3.text = posibleTargets[2].gameObject.name;
             }
             else { _abilitySelectionPanel.SetActive(false); }
+
+            if (players.GetComponent<AbilityHolder>().ability.name == "Intangible" && players.GetComponent<AbilityHolder>().ability.isOn)
+            {
+                _textSpecialMovement.gameObject.SetActive(true);
+                _textSpecialMovement.text = "Special Steps" + players.specialSteps;
+            }  
+            else _textSpecialMovement.gameObject.SetActive(false);
         }
 
 

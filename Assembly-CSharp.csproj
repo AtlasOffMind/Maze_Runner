@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Copycat.cs" />
-    <Compile Include="Assets\Animations\Perro.cs" />
+    <Compile Include="Assets\Scripts\AnimationsTransitions.cs" />
     <Compile Include="Assets\Scripts\Traps.cs" />
     <Compile Include="Assets\Scripts\Disarmer.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
@@ -74,10 +74,12 @@
     <Compile Include="Assets\Scripts\LongWalk.cs" />
     <Compile Include="Assets\Scripts\MazeCell.cs" />
     <Compile Include="Assets\Scripts\Ability.cs" />
+    <Compile Include="Assets\Scripts\Intangible.cs" />
     <Compile Include="Assets\Scripts\AbilityHolder.cs" />
     <Compile Include="Assets\Scripts\TurnManagement.cs" />
     <Compile Include="Assets\Scripts\Motion.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
     <Compile Include="Assets\Scripts\GameStatusController.cs" />

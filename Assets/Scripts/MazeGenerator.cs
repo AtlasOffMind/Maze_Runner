@@ -199,7 +199,7 @@ namespace MazeRunner
             // Cambia la apariencia visual de la entrada y salida
             for (int i = 0; i < 4; i++)
             {
-                entrance[i].ChangeColor(Color.grey); // Marca las entradas en gris.
+                entrance[i].ChangeColor(Color.green); // Marca las entradas en gris.
 
                 //Aqui les estoy poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
                 entrance[i].tag = "Entrance";

@@ -40,13 +40,10 @@ public class Disarmer : Ability
 
             player.amount--;
 
-            Debug.Log($"Trampa desactivada. Trampas restantes: {player.amount}");
-
             // Si no quedan trampas por desarmar, termina la habilidad.
             if (player.amount <= 0)
             {
                 player.CoolDown = CoolDown; // Aplica el enfriamiento.
-                Debug.Log("Habilidad completada. Entrando en enfriamiento.");
             }
           
         }

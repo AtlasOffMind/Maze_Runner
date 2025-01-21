@@ -23,7 +23,7 @@ public class AbilityHolder : MonoBehaviour
 
         player = TM.GetPlayer();
 
-        if (player.CoolDown == 0)
+        if (player.CoolDown == 0 && player.amount == 0 && player.specialSteps == 0)
         {
             if (Input.GetKeyDown(key))
             {
@@ -36,9 +36,10 @@ public class AbilityHolder : MonoBehaviour
 
         if (player.amount != 0 && ability.name == "Disarmer") { ability.Fast(); }
 
-        //if (ability.name == "CopyCat" && ability.isOn) { ability.Fast(); }
-
         if (savedAbility.name == "CopyCat" && player.CoolDown != 0) { ability = savedAbility; }
+
+        if (player.specialSteps != 0 && ability.name == "Intangible") { ability.Fast(); }
+
     }
     public void SaveAbility(Ability first, Ability second)
     {
