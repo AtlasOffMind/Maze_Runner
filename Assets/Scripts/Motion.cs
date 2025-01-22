@@ -27,6 +27,9 @@ public class Motion : MonoBehaviour
     private TurnManagement TM;
     int lastEntrance = -1;
 
+    public bool isSelecting;
+
+    private Vector3 currentDirection;
 
 
     void Start()
@@ -40,23 +43,32 @@ public class Motion : MonoBehaviour
         _CurrentPlayer = TM.GetPlayer();
 
         originalLifePoints = _CurrentPlayer.lifePoints;
+
+        isSelecting = false;
+        
+        currentDirection = Vector3.forward;
+
     }
     void Update()
     {
         _CurrentPlayer = TM.GetPlayer();
 
-        if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0)
+        if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0 && !isSelecting)
         {
             // Detecta la entrada del jugador para moverse
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SetDirection(Vector3.left);
+
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
-                    SpecialTryMove(Vector3.left);
+                { SpecialTryMove(Vector3.left); }
                 else
                     TryMove(Vector3.left);
             }
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SetDirection(Vector3.right);
+
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
                     SpecialTryMove(Vector3.right);
                 else
@@ -64,6 +76,7 @@ public class Motion : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                SetDirection(Vector3.back);
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
                     SpecialTryMove(Vector3.back);
                 else
@@ -71,6 +84,8 @@ public class Motion : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
+                SetDirection(Vector3.forward);
+
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
                     SpecialTryMove(Vector3.forward);
                 else
@@ -174,12 +189,23 @@ public class Motion : MonoBehaviour
             StartCoroutine(currentMovement);
 
             _CurrentPlayer.steps--;
-            _CurrentPlayer.specialSteps--;
+            if (_CurrentPlayer.specialSteps != 0) _CurrentPlayer.specialSteps--;
 
             currentCell = GetMazeCell(targetPosition);
 
             Traps.TrapIsActive(_CurrentPlayer, currentCell);
         }
         else Debug.Log("You can't escape out of the maze that easy ;)");
+    }
+
+    private void SetDirection(Vector3 newDirection)
+    {
+        if (currentDirection != newDirection)
+        {
+            currentDirection = newDirection;
+
+            // Cambia la rotación del personaje hacia la nueva dirección.
+            transform.rotation = Quaternion.LookRotation(currentDirection);
+        }
     }
 }

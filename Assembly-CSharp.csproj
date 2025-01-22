@@ -65,19 +65,23 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.2.12f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Copycat.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Joker.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Copycat.cs" />
     <Compile Include="Assets\Scripts\AnimationsTransitions.cs" />
     <Compile Include="Assets\Scripts\Traps.cs" />
-    <Compile Include="Assets\Scripts\Disarmer.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\AbilityHolder.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Ability.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
-    <Compile Include="Assets\Scripts\LongWalk.cs" />
     <Compile Include="Assets\Scripts\MazeCell.cs" />
-    <Compile Include="Assets\Scripts\Ability.cs" />
-    <Compile Include="Assets\Scripts\Intangible.cs" />
-    <Compile Include="Assets\Scripts\AbilityHolder.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Control.cs" />
+    <Compile Include="Assets\Scripts\Temp\temp 2.cs" />
+    <Compile Include="Assets\Scripts\Temp\Temp 1.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Intangible.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\Disarmer.cs" />
     <Compile Include="Assets\Scripts\TurnManagement.cs" />
     <Compile Include="Assets\Scripts\Motion.cs" />
+    <Compile Include="Assets\Scripts\SkillsScripts\LongWalk.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />

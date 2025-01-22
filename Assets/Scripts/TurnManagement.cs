@@ -10,6 +10,7 @@ namespace MazeRunner
     {
         private Player playerTurn;
         private List<Player> playersInGame;
+        private List<Player> tempPlayersInGame;
         private int listIndexer = 0;
         private MazeGenerator mazeGenerator;
         private int originalSteps = 0;
@@ -27,6 +28,7 @@ namespace MazeRunner
             if (playersInGame == null)
             {
                 playersInGame = playerselect;
+                tempPlayersInGame = playerselect;
 
                 for (int i = 0; i < playersInGame.Count; i++)
                 {
@@ -55,8 +57,33 @@ namespace MazeRunner
         public Player GetPlayer() => playerTurn;
         public List<Player> GetPlayersInGame() => playersInGame;
 
+        public bool ContainsPlayer(Vector3 targetPosition)
+        {
+            for (int i = 0; i < playersInGame.Count; i++)
+            {
+                if (targetPosition.x == playersInGame[i].transform.position.x && targetPosition.z == playersInGame[i].transform.position.z) return true;
+            }
+            return false;
+        }
+
+        public Player GetPlayer(Vector3 targetPosition)
+        {
+            for (int i = 0; i < playersInGame.Count; i++)
+            {
+                if (targetPosition.x == playersInGame[i].transform.position.x && targetPosition.z == playersInGame[i].transform.position.z) return playersInGame[i];
+            }
+            return null;
+        }
+
         public void EndTurn()
         {
+
+            //for (int i = 0; i < playersInGame.Count; i++) Debug.Log($"TurnManag antes de la revision : [{i}] = {playersInGame[i].name}");
+
+            if (playersInGame.Count != tempPlayersInGame.Count) { playersInGame = mazeGenerator.GetPlayers(); }
+
+            //for (int i = 0; i < playersInGame.Count; i++) Debug.Log($"TurnManag despues de la revision : [{i}] = {playersInGame[i].name} y {playersInGame.Count}");
+
             if (playerTurn.penaltyTurn != 0) playerTurn.penaltyTurn--;
 
             if (playersInGame.Count == 0) return;

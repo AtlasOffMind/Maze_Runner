@@ -35,6 +35,8 @@ namespace MazeRunner
         [SerializeField]
         public GameObject _InvisibleTrap;
 
+        [SerializeField]
+        public GameObject _SelectionCube;
         // Propiedad pública de solo lectura que indica si la celda ha sido visitada.
         public bool IsVisited; //{ get; public set; }
 
@@ -55,7 +57,8 @@ namespace MazeRunner
             _NormalFloor.SetActive(true); // 
             _GreenSpike.SetActive(false); // 
             _VioletHole.SetActive(false); // 
-            _InvisibleTrap.SetActive(false); // 
+            _InvisibleTrap.SetActive(false);//
+            _SelectionCube.SetActive(false); // 
 
             BackWallrender = _BackWall.GetComponentInChildren<Renderer>();
             FrontWallrender = _FronttWall.GetComponentInChildren<Renderer>();

@@ -288,6 +288,18 @@ namespace MazeRunner
         public MazeCell[,] GetMatrix() => _MazeGrid;
         public List<Player> GetPlayers() => _PlayerListPrefab;
 
+        public bool NearExit(Vector3 targetPosition)
+        {
+            for (int x = (_MazeWidth / 2) - 3; x < (_MazeWidth / 2) + 3; x++)
+            {
+                for (int z = (_MazeDepth / 2) - 3; z < (_MazeDepth / 2) + 3; z++)
+                {
+                    if (targetPosition.x == _MazeGrid[x, z].transform.position.x && targetPosition.z == _MazeGrid[x, z].transform.position.z) return true;
+                }
+            }
+            return false;
+        }
+
         private void SetRandomEntrance()
         {//Esto es lo q habia escrito para generar aleatoriamente las entradas.
             List<MazeCell> entrance1 = new List<MazeCell>();

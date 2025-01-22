@@ -76,7 +76,7 @@ namespace MazeRunner
             if (players.GetComponent<AbilityHolder>().ability.name == "Intangible" && players.GetComponent<AbilityHolder>().ability.isOn)
             {
                 _textSpecialMovement.gameObject.SetActive(true);
-                _textSpecialMovement.text = "Special Steps" + players.specialSteps;
+                _textSpecialMovement.text = "Special Steps: " + players.specialSteps;
             }  
             else _textSpecialMovement.gameObject.SetActive(false);
         }
