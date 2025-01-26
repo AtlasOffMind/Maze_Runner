@@ -6,27 +6,26 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Joker : Ability
 {
-    Player player;
-    // Start is called before the first frame update
+    int _ExtraLife;
+    List<Player> playersList;
+    TurnManagement TM;
     public override void Activate(Player parent)
     {
-        player = parent;
-        if (player.steps > 10 && player.CoolDown == 0)
+        Player player = parent;
+        if (player.lifePoints < 5)
         {
-            SetOn(true);
-            player.CoolDown = CoolDown; // Aplica el enfriamiento.
+            TM = FindFirstObjectByType<TurnManagement>();
+            playersList = TM.GetPlayersInGame();
+            _ExtraLife = 0;
+
+            for (int i = 0; i < playersList.Count; i++)
+                _ExtraLife += playersList[i].lifePoints;
+
+            player.lifePoints += _ExtraLife;
+
+            player.CoolDown = CoolDown;
+        
         }
-        else
-        {
-            Debug.Log("You can't use this skill with less than 10 steps left");
-        }
-    }
-    public override void Fast()
-    {
-        if (player.specialSteps <= 0)
-        {
-            SetOn(false);
-            player.specialSteps = 0;
-        }
+        else Debug.Log("Solo puedes usar esta habilidad si tienes menos de 5 HP ");
     }
 }

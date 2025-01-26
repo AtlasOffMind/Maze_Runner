@@ -29,6 +29,7 @@ public class Intangible : Ability
         if (player.specialSteps <= 0)
         {
             SetOn(false);
+            Debug.Log(player.GetComponent<AbilityHolder>().ability.isOn);
             player.specialSteps = 0;
         }
     }

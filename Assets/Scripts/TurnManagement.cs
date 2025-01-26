@@ -78,11 +78,7 @@ namespace MazeRunner
         public void EndTurn()
         {
 
-            //for (int i = 0; i < playersInGame.Count; i++) Debug.Log($"TurnManag antes de la revision : [{i}] = {playersInGame[i].name}");
-
             if (playersInGame.Count != tempPlayersInGame.Count) { playersInGame = mazeGenerator.GetPlayers(); }
-
-            //for (int i = 0; i < playersInGame.Count; i++) Debug.Log($"TurnManag despues de la revision : [{i}] = {playersInGame[i].name} y {playersInGame.Count}");
 
             if (playerTurn.penaltyTurn != 0) playerTurn.penaltyTurn--;
 

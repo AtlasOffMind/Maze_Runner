@@ -77,6 +77,7 @@ public class Motion : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 SetDirection(Vector3.back);
+
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
                     SpecialTryMove(Vector3.back);
                 else
@@ -169,7 +170,6 @@ public class Motion : MonoBehaviour
         isMoving = false;
     }
     public void StopMovement() { StopCoroutine(currentMovement); isMoving = false; }
-
 
     public MazeCell GetMazeCell(Vector3 targetPosition) => _MazeGrid[(int)targetPosition.x, (int)targetPosition.z];
 

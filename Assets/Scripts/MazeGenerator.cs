@@ -71,7 +71,7 @@ namespace MazeRunner
 
             TM.PlayerSelect(GetPlayers());
 
-            Traps.Print();
+            
         }
 
         // Método recursivo para generar el laberinto.

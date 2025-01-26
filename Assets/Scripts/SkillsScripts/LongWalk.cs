@@ -7,7 +7,6 @@ using UnityEngine;
 public class LongWalk : Ability
 {
     int _ExtraSteps;
-
     public override void Activate(Player parent)
     {
         Player player = parent;

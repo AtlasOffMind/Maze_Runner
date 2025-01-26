@@ -38,7 +38,7 @@ public class AbilityHolder : MonoBehaviour
 
         if (savedAbility.name == "CopyCat" && player.CoolDown != 0) { ability = savedAbility; }
 
-        if (player.specialSteps != 0 && ability.name == "Intangible") { ability.Fast(); }
+        if (ability.isOn && ability.name == "Intangible") { ability.Fast(); }
 
         if (ability.isOn && ability.name == "Control") { ability.Fast(); }
 
