@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Menu 2.unity
     guid: 57f2c6a794c03c441956afd62f351058
   - enabled: 1
+    path: Assets/Scenes/Seleccion de Personajes.unity
+    guid: dc4121d8dd58c614392bc6561e908da7
+  - enabled: 1
     path: Assets/Scenes/MazeRunnerSce.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

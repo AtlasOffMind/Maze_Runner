@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\SkillsScripts\Copycat.cs" />
     <Compile Include="Assets\Scripts\AnimationsTransitions.cs" />
     <Compile Include="Assets\Scripts\Traps.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\AbilityHolder.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\Menu.cs" />

@@ -396,6 +396,7 @@
 "Assets/Scripts/GameStatusController.cs"
 "Assets/Scripts/MazeCell.cs"
 "Assets/Scripts/MazeGenerator.cs"
+"Assets/Scripts/Menu Scripts/CharacterSelection.cs"
 "Assets/Scripts/Menu Scripts/Menu.cs"
 "Assets/Scripts/Motion.cs"
 "Assets/Scripts/Player.cs"

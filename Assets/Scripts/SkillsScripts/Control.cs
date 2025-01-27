@@ -64,7 +64,7 @@ public class Control : Ability
             mazeCell = newMazeCell;
             mazeCell._SelectionCube.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if (turnManagement.ContainsPlayer(mazeCell.transform.position) && !Maze.NearExit(mazeCell.transform.position))
             {
