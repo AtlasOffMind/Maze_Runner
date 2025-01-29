@@ -33,8 +33,6 @@ public class Disarmer : Ability
 
         if ((currentCell._VioletHole.CompareTag("VioletTrap") || currentCell._GreenSpike.CompareTag("GreenTrap") || currentCell._InvisibleTrap.CompareTag("InvisibleTrap")) && !tempCell.Contains(currentCell))
         {
-            //tempCell.Add(currentCell);
-
             currentCell._GreenSpike.SetActive(false); currentCell._GreenSpike.tag = "Untagged";
             currentCell._InvisibleTrap.SetActive(false); currentCell._InvisibleTrap.tag = "Untagged";
             currentCell._VioletHole.SetActive(false); currentCell._VioletHole.tag = "Untagged";

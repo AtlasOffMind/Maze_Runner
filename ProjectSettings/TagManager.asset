@@ -13,11 +13,11 @@ TagManager:
   - GreenTrap
   - VioletTrap
   - InvisibleTrap
-  - Player0
-  - Player1
-  - Player2
-  - Player3
-  - CinemachineTarget
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,7 @@ public class AbilityHolder : MonoBehaviour
 
         player = TM.GetPlayer();
 
-        if (player.CoolDown == 0 && player.amount == 0 && player.specialSteps == 0)
+        if (player.CoolDown == 0 && player.amount == 0 && player.specialSteps == 0 && player.gameObject.activeInHierarchy)
         {
             if (Input.GetKeyDown(key))
             {

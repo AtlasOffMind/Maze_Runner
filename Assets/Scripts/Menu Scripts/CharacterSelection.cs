@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using NUnit.Framework;
+using MazeRunner;
 
 
 public class CharacterSelection : MonoBehaviour
@@ -11,9 +12,6 @@ public class CharacterSelection : MonoBehaviour
     public List<GameObject> characters;
     public List<GameObject> blueTeam;
     public List<GameObject> redTeam;
-
-    public GameObject playButton;
-    public GameObject readyText;
 
     public List<GameObject> visualBlueTeamCube0;
     public List<GameObject> visualBlueTeamCube1;
@@ -23,8 +21,17 @@ public class CharacterSelection : MonoBehaviour
     int firstSelection = 1;
     int characterIndex = 0;
     bool theGameisReady = false;
-    int lastCount = 0;
 
+    public GameObject descriptionPanel;
+
+    public TextMeshProUGUI _skillNameText;
+    public TextMeshProUGUI _skillDescriptionText;
+
+    private GameObject currentCharacter;
+
+
+    public GameObject playButton;
+    public GameObject readyText;
 
 
 
@@ -32,6 +39,7 @@ public class CharacterSelection : MonoBehaviour
     {
         blueTeam = new List<GameObject>();
         redTeam = new List<GameObject>();
+        currentCharacter = characters[characterIndex];
     }
 
     public void NextCaracter()
@@ -40,6 +48,8 @@ public class CharacterSelection : MonoBehaviour
         characters[characterIndex].SetActive(false);
         characterIndex = (characterIndex + 1) % characters.Count;
         characters[characterIndex].SetActive(true);
+
+        currentCharacter = characters[characterIndex];
 
     }
     public void PreviousCaracter()
@@ -51,6 +61,9 @@ public class CharacterSelection : MonoBehaviour
             characterIndex = characters.Count - 1;
         }
         characters[characterIndex].SetActive(true);
+
+        currentCharacter = characters[characterIndex];
+
     }
 
     public void IsReadyToPlay()
@@ -65,6 +78,17 @@ public class CharacterSelection : MonoBehaviour
 
     void Update()
     {
+        if (currentCharacter != null)
+            _skillNameText.text = currentCharacter.GetComponent<AbilityHolder>().ability.name;
+
+        if (currentCharacter.GetComponent<AbilityHolder>().ability.name == "Control") _skillDescriptionText.text = "This character has the power of change places with another token on your command, if the other token position isn't very near to the exit";
+        else if (currentCharacter.GetComponent<AbilityHolder>().ability.name == "Disarmer") _skillDescriptionText.text = "This character can remove a limited number of traps and not being affected by them";
+        else if (currentCharacter.GetComponent<AbilityHolder>().ability.name == "Intangible") _skillDescriptionText.text = "This character has special steps , limited , that allows him to pass throw walls, but the traps has effect on him ";
+        else if (currentCharacter.GetComponent<AbilityHolder>().ability.name == "Joker") _skillDescriptionText.text = "This character heals itself with the Life Point of the others token even his own, only if he has less than 5 HP";
+        else if (currentCharacter.GetComponent<AbilityHolder>().ability.name == "Long Walk") _skillDescriptionText.text = "This character add 25 steps points at his own ";
+
+
+
         if (Input.GetKeyDown(KeyCode.Return) && firstSelection == 1 && !readyText.activeInHierarchy)
         {
             characters[characterIndex].SetActive(false);
@@ -149,7 +173,19 @@ public class CharacterSelection : MonoBehaviour
             }
         }
 
-
     }
+
+    private void SaveData()
+    {
+        CharacterKeepping.instance.blueTeam1 = blueTeam[0].name;
+        CharacterKeepping.instance.blueTeam2 = blueTeam[1].name;
+        CharacterKeepping.instance.redTeam1 = redTeam[0].name;
+        CharacterKeepping.instance.redTeam2 = redTeam[1].name;
+    }
+    private void OnDestroy()
+    {
+        SaveData();
+    }
+
 
 }

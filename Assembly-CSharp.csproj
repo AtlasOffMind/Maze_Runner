@@ -77,6 +77,7 @@
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\MazeCell.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\Control.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\CharacterKeepping.cs" />
     <Compile Include="Assets\Scripts\Temp\temp 2.cs" />
     <Compile Include="Assets\Scripts\Temp\Temp 1.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\Intangible.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\TurnManagement.cs" />
     <Compile Include="Assets\Scripts\Motion.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\LongWalk.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\TutorialMenu.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />

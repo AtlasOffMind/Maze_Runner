@@ -28,6 +28,8 @@ namespace MazeRunner
 
         private TurnManagement TMtemp;
         public static GameStatusController Gamestatuscontroller;
+
+        public GameObject Panel;
         private void Start()
         {
             Gamestatuscontroller = this;
@@ -48,7 +50,7 @@ namespace MazeRunner
             {
                 _textLifePoints.text = "Life Points: " + players.lifePoints;
                 _textStepLeft.text = "Steps left: " + players.steps;
-                _textTurn.text = "Turn: " + players.gameObject.name;
+                _textTurn.text = "Turn: " + players.Team + " Team";
                 _textCoolDown.text = "CoolDown: Turns left " + players.CoolDown;
 
                 if (players.GetComponent<AbilityHolder>().ability.name != "Disarmer")
@@ -79,6 +81,11 @@ namespace MazeRunner
                 _textSpecialMovement.text = "Special Steps: " + players.specialSteps;
             }  
             else _textSpecialMovement.gameObject.SetActive(false);
+
+
+            if(players.Team == "Blue") Panel.GetComponent<Image>().color = Color.blue;
+            else Panel.GetComponent<Image>().color = Color.red;
+
         }
 
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using MazeRunner;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Motion : MonoBehaviour
 {
@@ -175,7 +177,7 @@ public class Motion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Llegaste a la salida");
+        SceneManager.LoadScene(3);
     }
 
     private void SpecialTryMove(Vector3 direction)

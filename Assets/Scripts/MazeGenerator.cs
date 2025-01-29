@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace MazeRunner
@@ -37,6 +38,14 @@ namespace MazeRunner
         private List<MazeCell> exit = new List<MazeCell>();
         private TurnManagement TM;
 
+        private CharacterKeepping CHR;
+
+        void Awake()
+        {
+            CHR = FindAnyObjectByType<CharacterKeepping>();
+
+        }
+
         // Método Start que se ejecuta al iniciar el juego.
         void Start()
         {
@@ -44,6 +53,8 @@ namespace MazeRunner
             _MazeGrid = new MazeCell[_MazeWidth, _MazeDepth];
             _PlayerListPrefab = new List<Player>();
             TM = FindFirstObjectByType<TurnManagement>();
+            CHR = FindAnyObjectByType<CharacterKeepping>();
+
 
             // Bucle doble para instanciar cada celda en la cuadrícula del laberinto.
             for (int x = 0; x < _MazeWidth; x++)
@@ -71,7 +82,7 @@ namespace MazeRunner
 
             TM.PlayerSelect(GetPlayers());
 
-            
+
         }
 
         // Método recursivo para generar el laberinto.
@@ -199,7 +210,9 @@ namespace MazeRunner
             // Cambia la apariencia visual de la entrada y salida
             for (int i = 0; i < 4; i++)
             {
-                entrance[i].ChangeColor(Color.green); // Marca las entradas en gris.
+                if (i < 2)
+                    entrance[i].ChangeColor(Color.blue); // Marca las entradas en Azul.
+                else entrance[i].ChangeColor(Color.red);
 
                 //Aqui les estoy poniendo a las etiquetas para identificar las celdas de ENTRADA/SALIDA. 
                 entrance[i].tag = "Entrance";
@@ -263,24 +276,91 @@ namespace MazeRunner
 
         private void PlacingPlayer()
         {
-            _PlayerListPrefab = new List<Player>();
+            //CHR = FindAnyObjectByType<CharacterKeepping>();
+
+            //while (CHR == null)
+              //  CHR = FindAnyObjectByType<CharacterKeepping>();
+
+            List<string> ListTeamBlue = new List<string>();
+            List<string> ListTeamRed = new List<string>();
+
+
+            ListTeamBlue.Add(CHR.blueTeam1);
+            ListTeamBlue.Add(CHR.blueTeam2);
+            ListTeamRed.Add(CHR.redTeam1);
+            ListTeamRed.Add(CHR.redTeam2);
+
 
             List<Vector3> entrancePositions = new List<Vector3>();
-
-            //float fallHeight = 10f;
-            //float positionY = 0.3f;
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 entrancePositions.Add(entrance[i].transform.position);
-                _PlayerPrefab[i].transform.SetPositionAndRotation(new Vector3(entrancePositions[i].x, _PlayerPrefab[i].transform.position.y, entrancePositions[i].z), _PlayerPrefab[i].transform.rotation);
-
-                _PlayerPrefab[i].gameObject.name = "Player " + i.ToString();
-                _PlayerPrefab[i].tag = "Player" + i.ToString();
-                _PlayerPrefab[i].GettingSetting();
-                _PlayerListPrefab.Add(_PlayerPrefab[i]);
 
             }
+
+            for (int i = 0; i < ListTeamBlue.Count; i++)
+                Debug.Log($"[{i}] => {ListTeamBlue[i]}");
+            for (int i = 0; i < ListTeamRed.Count; i++)
+                Debug.Log($"[{i}] => {ListTeamRed[i]}");
+
+            int index = 0;
+            foreach (Player character in _PlayerPrefab)
+            {
+                // Si el personaje está en la lista de seleccionados
+                if (ListTeamBlue.Contains(character.gameObject.transform.GetChild(0).name))
+                {
+                    // Activar el personaje
+                    character.gameObject.SetActive(true);
+
+                    character.Team = "Blue";
+
+                    // Colocarlo en la posición correspondiente
+                    if (index < _PlayerPrefab.Length)
+                    {
+                        character.transform.SetPositionAndRotation(new Vector3(entrancePositions[index].x, character.transform.position.y, entrancePositions[index].z), character.transform.rotation);
+                        _PlayerListPrefab.Add(character);
+                        index++;
+                    }
+
+                }
+                else
+                {
+                    // Si el personaje NO está en la lista de seleccionados, desactivarlo
+                    character.gameObject.SetActive(false);
+                    character.GetComponent<AbilityHolder>().enabled = false;
+                }
+            }
+
+            foreach (Player character in _PlayerPrefab)
+            {
+                // Si el personaje está en la lista de seleccionados
+                if (ListTeamRed.Contains(character.gameObject.transform.GetChild(0).name))
+                {
+                    // Activar el personaje
+                    character.gameObject.SetActive(true);
+
+                    character.Team = "Red";
+
+                    // Colocarlo en la posición correspondiente
+                    if (index < _PlayerPrefab.Length)
+                    {
+                        character.transform.SetPositionAndRotation(new Vector3(entrancePositions[index].x, character.transform.position.y, entrancePositions[index].z), character.transform.rotation);
+                        _PlayerListPrefab.Add(character);
+                        index++;
+                    }
+
+                }
+                else if (!ListTeamRed.Contains(character.gameObject.transform.GetChild(0).name) && !_PlayerListPrefab.Contains(character))
+                {
+                    // Si el personaje NO está en la lista de seleccionados, desactivarlo
+                    character.gameObject.SetActive(false);
+                    character.GetComponent<AbilityHolder>().enabled = false;
+                }
+            }
+
+
+
         }
 
         public List<MazeCell> GetEntrance() => entrance;

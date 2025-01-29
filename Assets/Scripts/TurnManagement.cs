@@ -10,7 +10,7 @@ namespace MazeRunner
     {
         private Player playerTurn;
         private List<Player> playersInGame;
-        private List<Player> tempPlayersInGame;
+        //private List<Player> tempPlayersInGame;
         private int listIndexer = 0;
         private MazeGenerator mazeGenerator;
         private int originalSteps = 0;
@@ -28,13 +28,14 @@ namespace MazeRunner
             if (playersInGame == null)
             {
                 playersInGame = playerselect;
-                tempPlayersInGame = playerselect;
+                //tempPlayersInGame = playerselect;
 
                 for (int i = 0; i < playersInGame.Count; i++)
                 {
                     Destroy(playersInGame[i].GetComponent<Motion>());
                     playersInGame[i].GetComponent<AbilityHolder>().enabled = false;
                 }
+
             }
 
             playerTurn = playersInGame[listIndexer];
@@ -78,7 +79,7 @@ namespace MazeRunner
         public void EndTurn()
         {
 
-            if (playersInGame.Count != tempPlayersInGame.Count) { playersInGame = mazeGenerator.GetPlayers(); }
+            //if (playersInGame.Count != tempPlayersInGame.Count) { playersInGame = mazeGenerator.GetPlayers(); }
 
             if (playerTurn.penaltyTurn != 0) playerTurn.penaltyTurn--;
 

@@ -15,13 +15,13 @@ namespace MazeRunner
         public int  penaltyTurn;
         public int amount;
         public int specialSteps;
+        public string Team;
 
 
         public void GettingSetting()
         {
             inTurn = false;
             if (penaltyTurn != 0) penaltyTurn = 0;
-
         }
     }
 }
