@@ -16,6 +16,8 @@ namespace MazeRunner
         public int amount;
         public int specialSteps;
         public string Team;
+        public bool _HeWons;
+        
 
 
         public void GettingSetting()

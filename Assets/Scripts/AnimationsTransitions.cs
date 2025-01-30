@@ -19,6 +19,8 @@ public class AnimationsTransitions : MonoBehaviour
             anim = player.GetComponentInChildren<Animator>();
         }
         else anim = gameObject.GetComponent<Animator>();
+
+        if (inMenu && player._HeWons) anim.SetBool("wons", true);
     }
 
     // Update is called once per frame

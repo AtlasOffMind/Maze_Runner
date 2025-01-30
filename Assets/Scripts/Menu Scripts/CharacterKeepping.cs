@@ -1,10 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
-using NUnit.Framework;
-using MazeRunner;
+
 
 public class CharacterKeepping : MonoBehaviour
 {
@@ -22,14 +17,11 @@ public class CharacterKeepping : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if (instance != this)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 
     }

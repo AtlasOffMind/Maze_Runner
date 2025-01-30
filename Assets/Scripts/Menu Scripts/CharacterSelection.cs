@@ -68,6 +68,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void IsReadyToPlay()
     {
+        SaveData();
         SceneManager.LoadScene(2);
     }
     public void GoBack()
@@ -182,10 +183,5 @@ public class CharacterSelection : MonoBehaviour
         CharacterKeepping.instance.redTeam1 = redTeam[0].name;
         CharacterKeepping.instance.redTeam2 = redTeam[1].name;
     }
-    private void OnDestroy()
-    {
-        SaveData();
-    }
-
 
 }

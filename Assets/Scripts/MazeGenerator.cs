@@ -38,14 +38,6 @@ namespace MazeRunner
         private List<MazeCell> exit = new List<MazeCell>();
         private TurnManagement TM;
 
-        private CharacterKeepping CHR;
-
-        void Awake()
-        {
-            CHR = FindAnyObjectByType<CharacterKeepping>();
-
-        }
-
         // Método Start que se ejecuta al iniciar el juego.
         void Start()
         {
@@ -53,7 +45,6 @@ namespace MazeRunner
             _MazeGrid = new MazeCell[_MazeWidth, _MazeDepth];
             _PlayerListPrefab = new List<Player>();
             TM = FindFirstObjectByType<TurnManagement>();
-            CHR = FindAnyObjectByType<CharacterKeepping>();
 
 
             // Bucle doble para instanciar cada celda en la cuadrícula del laberinto.
@@ -82,7 +73,11 @@ namespace MazeRunner
 
             TM.PlayerSelect(GetPlayers());
 
-
+            for (int i = 0; i < exit.Count; i++)
+            {
+                exit[i]._MazeCellTrigger.SetActive(true);
+                exit[i]._MazeCellTrigger.GetComponent<Ontriggered>().enabled = true;
+            }
         }
 
         // Método recursivo para generar el laberinto.
@@ -276,19 +271,15 @@ namespace MazeRunner
 
         private void PlacingPlayer()
         {
-            //CHR = FindAnyObjectByType<CharacterKeepping>();
-
-            //while (CHR == null)
-              //  CHR = FindAnyObjectByType<CharacterKeepping>();
 
             List<string> ListTeamBlue = new List<string>();
             List<string> ListTeamRed = new List<string>();
 
 
-            ListTeamBlue.Add(CHR.blueTeam1);
-            ListTeamBlue.Add(CHR.blueTeam2);
-            ListTeamRed.Add(CHR.redTeam1);
-            ListTeamRed.Add(CHR.redTeam2);
+            ListTeamBlue.Add(CharacterKeepping.instance.blueTeam1);
+            ListTeamBlue.Add(CharacterKeepping.instance.blueTeam2);
+            ListTeamRed.Add(CharacterKeepping.instance.redTeam1);
+            ListTeamRed.Add(CharacterKeepping.instance.redTeam2);
 
 
             List<Vector3> entrancePositions = new List<Vector3>();
@@ -296,13 +287,7 @@ namespace MazeRunner
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 entrancePositions.Add(entrance[i].transform.position);
-
             }
-
-            for (int i = 0; i < ListTeamBlue.Count; i++)
-                Debug.Log($"[{i}] => {ListTeamBlue[i]}");
-            for (int i = 0; i < ListTeamRed.Count; i++)
-                Debug.Log($"[{i}] => {ListTeamRed[i]}");
 
             int index = 0;
             foreach (Player character in _PlayerPrefab)
@@ -358,15 +343,13 @@ namespace MazeRunner
                     character.GetComponent<AbilityHolder>().enabled = false;
                 }
             }
-
-
-
         }
 
         public List<MazeCell> GetEntrance() => entrance;
         public List<MazeCell> GetExit() => exit;
         public MazeCell[,] GetMatrix() => _MazeGrid;
         public List<Player> GetPlayers() => _PlayerListPrefab;
+
 
         public bool NearExit(Vector3 targetPosition)
         {

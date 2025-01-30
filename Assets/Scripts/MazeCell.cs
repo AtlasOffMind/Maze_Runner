@@ -37,6 +37,9 @@ namespace MazeRunner
 
         [SerializeField]
         public GameObject _SelectionCube;
+
+        [SerializeField]
+        public GameObject _MazeCellTrigger;
         // Propiedad pública de solo lectura que indica si la celda ha sido visitada.
         public bool IsVisited; //{ get; public set; }
 

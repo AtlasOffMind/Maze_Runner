@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using MazeRunner;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class Motion : MonoBehaviour
@@ -174,12 +173,6 @@ public class Motion : MonoBehaviour
     public void StopMovement() { StopCoroutine(currentMovement); isMoving = false; }
 
     public MazeCell GetMazeCell(Vector3 targetPosition) => _MazeGrid[(int)targetPosition.x, (int)targetPosition.z];
-
-    private void OnTriggerEnter(Collider other)
-    {
-        SceneManager.LoadScene(3);
-    }
-
     private void SpecialTryMove(Vector3 direction)
     {
         targetPosition = _CurrentPlayer.transform.position + direction * moveDistance;

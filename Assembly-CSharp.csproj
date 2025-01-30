@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\SkillsScripts\Copycat.cs" />
     <Compile Include="Assets\Scripts\AnimationsTransitions.cs" />
     <Compile Include="Assets\Scripts\Traps.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\CreditsMenu.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\AbilityHolder.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\MazeCell.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\Control.cs" />
+    <Compile Include="Assets\Scripts\Ontriggered.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\CharacterKeepping.cs" />
     <Compile Include="Assets\Scripts\Temp\temp 2.cs" />
     <Compile Include="Assets\Scripts\Temp\Temp 1.cs" />
@@ -86,12 +88,14 @@
     <Compile Include="Assets\Scripts\Motion.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\LongWalk.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\TutorialMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\WinCharacter.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
     <Compile Include="Assets\Scripts\GameStatusController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Packs\SpaceZeta_Spotlight\Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />

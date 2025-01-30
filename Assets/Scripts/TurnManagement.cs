@@ -71,7 +71,7 @@ namespace MazeRunner
         {
             for (int i = 0; i < playersInGame.Count; i++)
             {
-                if (targetPosition.x == playersInGame[i].transform.position.x && targetPosition.z == playersInGame[i].transform.position.z) return playersInGame[i];
+                if (targetPosition.x == (int)playersInGame[i].transform.position.x && targetPosition.z == (int)playersInGame[i].transform.position.z) return playersInGame[i];
             }
             return null;
         }

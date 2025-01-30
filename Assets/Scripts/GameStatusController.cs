@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace MazeRunner
 {
@@ -79,14 +80,16 @@ namespace MazeRunner
             {
                 _textSpecialMovement.gameObject.SetActive(true);
                 _textSpecialMovement.text = "Special Steps: " + players.specialSteps;
-            }  
+            }
             else _textSpecialMovement.gameObject.SetActive(false);
 
 
-            if(players.Team == "Blue") Panel.GetComponent<Image>().color = Color.blue;
+            if (players.Team == "Blue") Panel.GetComponent<Image>().color = Color.blue;
             else Panel.GetComponent<Image>().color = Color.red;
 
         }
+
+
 
 
     }
