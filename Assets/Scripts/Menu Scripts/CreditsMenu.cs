@@ -29,7 +29,7 @@ public class CreditsMenu : MonoBehaviour
 
 
         Invoke("WaitToEnd", 30);
-        Invoke("SeeDancer", 15);
+        Invoke("SeeDancer", 19.35f);
     }
     void Update()
     {

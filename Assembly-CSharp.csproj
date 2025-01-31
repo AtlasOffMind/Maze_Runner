@@ -72,10 +72,10 @@
     <Compile Include="Assets\Scripts\Menu Scripts\CreditsMenu.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\AbilityHolder.cs" />
-    <Compile Include="Assets\Model\Military\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\Option Menu.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\Ability.cs" />
-    <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\MazeCell.cs" />
     <Compile Include="Assets\Scripts\SkillsScripts\Control.cs" />
     <Compile Include="Assets\Scripts\Ontriggered.cs" />
@@ -90,7 +90,6 @@
     <Compile Include="Assets\Scripts\Menu Scripts\TutorialMenu.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\WinCharacter.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Model\Military\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
     <Compile Include="Assets\Scripts\GameStatusController.cs" />
   </ItemGroup>
@@ -108,7 +107,6 @@
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\Model\Military\StarterAssets\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />

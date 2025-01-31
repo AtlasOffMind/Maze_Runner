@@ -19,8 +19,8 @@ public class AnimationsTransitions : MonoBehaviour
             anim = player.GetComponentInChildren<Animator>();
         }
         else anim = gameObject.GetComponent<Animator>();
-
-        if (inMenu && player._HeWons) anim.SetBool("wons", true);
+        if (gameObject.GetComponent<Player>() != null)
+            if (inMenu && player._HeWons) anim.SetBool("wons", true);
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class AnimationsTransitions : MonoBehaviour
     {
         if (!inMenu)
         {
-            if (player.inTurn)  m = player.GetComponent<Motion>(); 
+            if (player.inTurn) m = player.GetComponent<Motion>();
 
             if (player.inTurn && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) ||
                 Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))

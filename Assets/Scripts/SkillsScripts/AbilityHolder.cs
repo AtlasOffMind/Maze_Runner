@@ -32,15 +32,17 @@ public class AbilityHolder : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(key) && player.CoolDown != 0) { Debug.Log("La habilidad aun no se puede usar"); }
-
         if (player.amount != 0 && ability.name == "Disarmer") { ability.Fast(); }
 
         if (savedAbility.name == "CopyCat" && player.CoolDown != 0) { ability = savedAbility; }
 
         if (ability.isOn && ability.name == "Intangible") { ability.Fast(); }
 
-        if (ability.isOn && ability.name == "Control") { ability.Fast(); }
+        if (ability.isOn && ability.name == "Control")
+        {
+            if (player.steps >= 5) player.steps -= 5;
+            ability.Fast();
+        }
 
     }
     public void SaveAbility(Ability first, Ability second)

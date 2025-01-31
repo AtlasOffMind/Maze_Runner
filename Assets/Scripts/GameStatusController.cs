@@ -21,6 +21,8 @@ namespace MazeRunner
         public TextMeshProUGUI _textbutton1;
         public TextMeshProUGUI _textbutton2;
         public TextMeshProUGUI _textbutton3;
+        public TextMeshProUGUI _warning;
+
 
         public GameObject _abilitySelectionPanel;
         public Button button1;
@@ -31,6 +33,7 @@ namespace MazeRunner
         public static GameStatusController Gamestatuscontroller;
 
         public GameObject Panel;
+        public GameObject pauseMenu;
         private void Start()
         {
             Gamestatuscontroller = this;
@@ -41,6 +44,11 @@ namespace MazeRunner
         void Update()
         {
             players = TMtemp.GetPlayer();
+
+            players.transform.GetChild(1).gameObject.SetActive(true);
+
+            if (players.Team == "Blue") players.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.color = Color.blue;
+            else players.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.color = Color.red;
 
             if (posibleTargets == null)
                 posibleTargets = TMtemp.GetPlayersInGame();
@@ -87,10 +95,30 @@ namespace MazeRunner
             if (players.Team == "Blue") Panel.GetComponent<Image>().color = Color.blue;
             else Panel.GetComponent<Image>().color = Color.red;
 
+
+            if (Input.GetKeyDown(KeyCode.Space) && players.CoolDown != 0)
+            {
+                _warning.transform.parent.gameObject.SetActive(true);
+                _warning.text = "The Skill Can't be use now";
+            }
+            else
+            {
+                Invoke("Off", 2.5f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                players.gameObject.GetComponent<Motion>().enabled = false;
+                pauseMenu.gameObject.SetActive(true);
+            }
+
         }
 
+        public Player GetPlayer() => players;
 
-
-
+        void Off()
+        {
+            _warning.transform.parent.gameObject.SetActive(false);
+        }
     }
 }

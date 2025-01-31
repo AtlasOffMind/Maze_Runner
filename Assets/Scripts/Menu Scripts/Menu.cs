@@ -45,9 +45,7 @@ public class Menu : MonoBehaviour
 
         MoverMenu(tiempo, _OptionMenu.transform.position, new Vector3(signo * posFinal, _OptionMenu.transform.position.y, 0), _OptionMenu);
 
-
         abrirMenu = !abrirMenu;
-        Debug.Log(abrirMenu);
     }
     public void ButtonTutorialMenu()
     {
@@ -57,9 +55,7 @@ public class Menu : MonoBehaviour
 
         MoverMenu(tiempo, _TutorialMenu.transform.position, new Vector3(signo * posFinal, _TutorialMenu.transform.position.y, 0), _TutorialMenu);
 
-
         abrirMenu = !abrirMenu;
-        Debug.Log(abrirMenu);
     }
 
 

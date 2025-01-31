@@ -79,7 +79,7 @@ namespace MazeRunner
         public void EndTurn()
         {
 
-            //if (playersInGame.Count != tempPlayersInGame.Count) { playersInGame = mazeGenerator.GetPlayers(); }
+            playerTurn.transform.GetChild(1).gameObject.SetActive(false);
 
             if (playerTurn.penaltyTurn != 0) playerTurn.penaltyTurn--;
 
