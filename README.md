@@ -38,7 +38,7 @@ Descripcion del Codigo:
          Esta clase es la destinada a desplazar a los personajes por cada una de las celdas dentro del laberinto y evitando que atraviesen paredes. Esta clase desplaza, deselecciona y salta a los tokens según criterios correspondientes dentro de ella durante la ejecución del juego. 
 
                                     
-                                                                                                       ¡Gracias por jugar!
+                                                                    ¡Gracias por jugar!
 
 
 Pd: Espero que haya disfrutado tanto el proyecto como yo a la hora de realizarlo y verlo completado dado a lo arduo que fue hacer el proyecto en 3D y con 0 conocimiento de Unity, solo pido que no tenga demasiado en cuenta el apartado visual dado a que aún lo puedo mejorar mas tenga en cuenta que esto es lo máximo que he podido lograr antes de la fecha límite.
