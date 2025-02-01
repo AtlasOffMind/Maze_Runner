@@ -52,8 +52,8 @@ Descripcion del Codigo:
                    guardándolas en listas de tipo MazeCell para ser utilizadas más tarde por otras clases.
                    
                 d.	Traps.Iniciate:
-                   Este es un método que hace iniciar las instanciaciones necesarias en la clase Traps para ser usadas adecuadamente
-                   luego.
+                   Este es un método que hace iniciar las instanciaciones necesarias en la clase Traps para ser usadas 
+                   adecuadamente luego.
                    
                 e.	PuttingTraps:
                    Un método dedicado solamente a la colocación de los 3 tipos de trampas diferentes en posiciones aleatorias del 
@@ -64,14 +64,14 @@ Descripcion del Codigo:
                    
                 g.	TM.PlayerSelect:
                    Este método se encuentra en la clase TurnManagement, de la cual hablaremos ahora, este método recibe una lista 
-                   de tipo Player y selecciona al 1er token que le toca jugar y lo activa como el único al cual se le permite moverse 
-                   hasta que se acabe su turno.
+                   de tipo Player y selecciona al 1er token que le toca jugar y lo activa como el único al cual se le permite 
+                   moverse hasta que se acabe su turno.
                    
     5-	TurnManagement:
     
          Esta clase gestiona toda la lógica de los turnos recibiendo una lista de tipo Player donde se encuentran todos los 
-         jugadores en juego. Esta clase activa y le pasa a cada token los componentes necesarios para jugar sin crear conflictos con 
-         los otros scripts del juego mientras esta en ejecución. 
+         jugadores en juego. Esta clase activa y le pasa a cada token los componentes necesarios para jugar sin crear conflictos 
+         con los otros scripts del juego mientras esta en ejecución. 
          
     6-	Motion:
     
