@@ -1,7 +1,8 @@
 Introduccion:
  En este primer proyecto de programación se pidió desarrollar un juego al estilo "Maze Runner". Dada esta petición, utilizando Unity como entorno de desarrollo y diseño 3D, C# como lenguaje de programación, grandes cantidades de café como alimento fundamental en las madrugadas de programación, un desarrollador con ideas locas y pocas horas de sueño, nació este juego llamado "Maze Runners: Running in the Edge" ambientado levemente en la película Maze Runners y otras ideas por parte del desarrollador.
 
-Guía de instalación 
+Guía de instalación:
+
  Descargar el "MazeRunner.rar", descomprimir en la carpeta que desee guardar el juego. Buscar el archivo MazeRunner.exe y dar doble click y jugar. 
 
 Requisitos para la instalación
