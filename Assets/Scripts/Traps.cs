@@ -78,19 +78,7 @@ namespace MazeRunner
             {
                 _PlayerPrefab.lifePoints--;
             }
-
-
-
         }
-        public static void Print()
-        {
-            Debug.Log("VioletTrap " + VioletTrap[0].name);
-            Debug.Log("InvisibleTrap " + InvisibleTrap[0].name);
-            Debug.Log("GreenTrap " + GreenTrap[0].name);
-        }
-
-
-
     }
 
 }
