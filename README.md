@@ -6,11 +6,14 @@ Guía de instalación:
  Descargar el "MazeRunner.rar", descomprimir en la carpeta que desee guardar el juego. Buscar el archivo MazeRunner.exe y dar doble click y jugar. 
 
 Requisitos para la instalación
+
  Usar Windows como Sistema Operativo.
 
 Descripcion del Codigo:
+
  La lógica del juego esta compuesta por un conjunto de clases en las que se implementan métodos de manera consecutiva necesarios para el control del  juego.
  Entre las clases principales se encuentran:
+ 
     1-	MazeCell:
          Es una clase destinada a guardar todos los componentes necesarios para crear un prefabricado acorde a la forma de una pequeña habitación en forma de cubo (celada) y además tener los métodos necesarios para poder ajustar y personalizar dichas celdas.
     2-	Player:
