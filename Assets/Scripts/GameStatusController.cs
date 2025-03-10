@@ -35,11 +35,18 @@ namespace MazeRunner
 
         public GameObject Panel;
         public GameObject pauseMenu;
+
+        public GameObject camera0;
+        public GameObject camera1;
+        private Vector3 cameraPos;
+
+
         private void Start()
         {
             Gamestatuscontroller = this;
             TMtemp = FindFirstObjectByType<TurnManagement>();
             _abilitySelectionPanel.SetActive(false);
+
         }
 
         void Update()
@@ -53,6 +60,17 @@ namespace MazeRunner
 
             if (posibleTargets == null)
                 posibleTargets = TMtemp.GetPlayersInGame();
+
+            if (players.gameObject.activeInHierarchy && players.gameObject.name == "Token (1)")
+            {
+                camera0.gameObject.SetActive(false);
+                camera1.gameObject.SetActive(true);
+                //camera2.gameObject.SetActive(true);
+                //camera3.gameObject.SetActive(true);
+                //camera4.gameObject.SetActive(true);
+            }
+
+
 
 
 
@@ -104,7 +122,7 @@ namespace MazeRunner
                 _warning.transform.parent.gameObject.SetActive(true);
                 _warning.text = "You can only use this skill with less than 5 HP ";
                 Invoke("Off", 5f);
-                
+
             }
 
 
@@ -127,6 +145,8 @@ namespace MazeRunner
             }
 
         }
+
+
 
         public Player GetPlayer() => players;
 
