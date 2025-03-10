@@ -5,6 +5,7 @@ using MazeRunner;
 using UnityEngine;
 
 
+
 public class Motion : MonoBehaviour
 {
     private Player _CurrentPlayer;
@@ -32,11 +33,14 @@ public class Motion : MonoBehaviour
 
     private Vector3 currentDirection;
 
+    private GameStatusController GSC;
+
 
     void Start()
     {
         TM = FindFirstObjectByType<TurnManagement>();
         mazeGenerator = FindFirstObjectByType<MazeGenerator>();
+        GSC = FindFirstObjectByType<GameStatusController>();
 
         entrance = mazeGenerator.GetEntrance();
         _MazeGrid = mazeGenerator.GetMatrix();
@@ -46,13 +50,15 @@ public class Motion : MonoBehaviour
         originalLifePoints = _CurrentPlayer.lifePoints;
 
         isSelecting = false;
-        
+
         currentDirection = Vector3.forward;
 
     }
     void Update()
     {
         _CurrentPlayer = TM.GetPlayer();
+
+
 
         if (!isMoving && _CurrentPlayer.inTurn == true && _CurrentPlayer.penaltyTurn == 0 && !isSelecting)
         {
@@ -62,7 +68,9 @@ public class Motion : MonoBehaviour
                 SetDirection(Vector3.left);
 
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
-                { SpecialTryMove(Vector3.left); }
+                {
+                    SpecialTryMove(Vector3.left);
+                }
                 else
                     TryMove(Vector3.left);
             }
@@ -71,7 +79,9 @@ public class Motion : MonoBehaviour
                 SetDirection(Vector3.right);
 
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                {
                     SpecialTryMove(Vector3.right);
+                }
                 else
                     TryMove(Vector3.right);
             }
@@ -80,7 +90,9 @@ public class Motion : MonoBehaviour
                 SetDirection(Vector3.back);
 
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                {
                     SpecialTryMove(Vector3.back);
+                }
                 else
                     TryMove(Vector3.back);
             }
@@ -89,7 +101,9 @@ public class Motion : MonoBehaviour
                 SetDirection(Vector3.forward);
 
                 if (_CurrentPlayer.GetComponent<AbilityHolder>().ability.name == "Intangible" && _CurrentPlayer.GetComponent<AbilityHolder>().ability.isOn)
+                {
                     SpecialTryMove(Vector3.forward);
+                }
                 else
                     TryMove(Vector3.forward);
             }
@@ -104,6 +118,8 @@ public class Motion : MonoBehaviour
             Restart();
             _CurrentPlayer.lifePoints = originalLifePoints;
         }
+
+
     }
 
     private void TryMove(Vector3 direction)
@@ -126,15 +142,17 @@ public class Motion : MonoBehaviour
         }
         else if (Physics.Raycast(_CurrentPlayer.transform.position, direction, moveDistance, wallLayer))
         {
-            UnityEngine.Debug.Log("Hay una pared en esa dirección.");
-        }
-        else if (_CurrentPlayer.steps == 0)
-        {
-            UnityEngine.Debug.Log("No puedes dar mas pasos.");
+            GSC._warning.transform.parent.gameObject.SetActive(true);
+            GSC._warning.text = "You can't walk throught walls";
+
+            Invoke("GSC.Off", 5f);
         }
         else
         {
-            UnityEngine.Debug.Log("Hay un jugador en esa casilla");
+            GSC._warning.transform.parent.gameObject.SetActive(true);
+            GSC._warning.text = "There is a player in that cell";
+
+            Invoke("GSC.Off", 5f);
         }
 
     }
@@ -177,7 +195,7 @@ public class Motion : MonoBehaviour
     {
         targetPosition = _CurrentPlayer.transform.position + direction * moveDistance;
 
-        if ((int)targetPosition.x >= 0 && (int)targetPosition.x <= 29 && (int)targetPosition.z >= 0 && (int)targetPosition.x <= 29)
+        if ((int)targetPosition.x >= 0 && (int)targetPosition.x <= 29 && (int)targetPosition.z >= 0 && (int)targetPosition.z <= 29)
         {
             if (currentMovement != null) StopCoroutine(currentMovement); // Detiene corrutinas previas
             currentMovement = MoveToTarget(); // Guarda la nueva corrutina
@@ -190,17 +208,26 @@ public class Motion : MonoBehaviour
 
             Traps.TrapIsActive(_CurrentPlayer, currentCell);
         }
-        else Debug.Log("You can't escape out of the maze that easy ;)");
+        else
+        {
+            GSC._warning.transform.parent.gameObject.SetActive(true);
+            GSC._warning.text = "You can't escape from the maze so easy ;)";
+
+            Invoke("GSC.Off", 8f);
+        }
     }
 
+    // Cambia la rotación del personaje hacia la nueva dirección.
     private void SetDirection(Vector3 newDirection)
     {
         if (currentDirection != newDirection)
         {
             currentDirection = newDirection;
 
-            // Cambia la rotación del personaje hacia la nueva dirección.
             transform.rotation = Quaternion.LookRotation(currentDirection);
         }
     }
+
+
+
 }

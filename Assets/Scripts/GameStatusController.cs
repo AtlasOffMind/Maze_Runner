@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace MazeRunner
 {
+    /*Este script esta creado para controlar los datos mostrados en pantalla. */
     public class GameStatusController : MonoBehaviour
     {
         Player players;
@@ -84,12 +85,28 @@ namespace MazeRunner
             }
             else { _abilitySelectionPanel.SetActive(false); }
 
+            if (Input.GetKeyDown(KeyCode.Space) && players.GetComponent<AbilityHolder>().ability.name == "Intangible" && players.steps < 10)
+            {
+                _warning.transform.parent.gameObject.SetActive(true);
+                _warning.text = "You can't use this skill with less than 10 steps left";
+                Invoke("Off", 5f);
+            }
+
             if (players.GetComponent<AbilityHolder>().ability.name == "Intangible" && players.GetComponent<AbilityHolder>().ability.isOn)
             {
                 _textSpecialMovement.gameObject.SetActive(true);
                 _textSpecialMovement.text = "Special Steps: " + players.specialSteps;
             }
             else _textSpecialMovement.gameObject.SetActive(false);
+
+            if (Input.GetKeyDown(KeyCode.Space) && players.GetComponent<AbilityHolder>().ability.name == "Joker" && players.lifePoints < 5)
+            {
+                _warning.transform.parent.gameObject.SetActive(true);
+                _warning.text = "You can only use this skill with less than 5 HP ";
+                Invoke("Off", 5f);
+                
+            }
+
 
 
             if (players.Team == "Blue") Panel.GetComponent<Image>().color = Color.blue;
@@ -100,10 +117,7 @@ namespace MazeRunner
             {
                 _warning.transform.parent.gameObject.SetActive(true);
                 _warning.text = "The Skill Can't be use now";
-            }
-            else
-            {
-                Invoke("Off", 2.5f);
+                Invoke("Off", 8f);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -116,7 +130,7 @@ namespace MazeRunner
 
         public Player GetPlayer() => players;
 
-        void Off()
+        public void Off()
         {
             _warning.transform.parent.gameObject.SetActive(false);
         }

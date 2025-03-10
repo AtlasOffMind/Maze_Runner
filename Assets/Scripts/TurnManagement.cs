@@ -10,7 +10,6 @@ namespace MazeRunner
     {
         private Player playerTurn;
         private List<Player> playersInGame;
-        //private List<Player> tempPlayersInGame;
         private int listIndexer = 0;
         private MazeGenerator mazeGenerator;
         private int originalSteps = 0;
@@ -28,7 +27,6 @@ namespace MazeRunner
             if (playersInGame == null)
             {
                 playersInGame = playerselect;
-                //tempPlayersInGame = playerselect;
 
                 for (int i = 0; i < playersInGame.Count; i++)
                 {

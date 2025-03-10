@@ -19,17 +19,12 @@ public class Intangible : Ability
             SetOn(true);
             player.CoolDown = CoolDown; // Aplica el enfriamiento.
         }
-        else
-        {
-            Debug.Log("You can't use this skill with less than 10 steps left");
-        }
     }
     public override void Fast()
     {
         if (player.specialSteps <= 0)
         {
             SetOn(false);
-            Debug.Log(player.GetComponent<AbilityHolder>().ability.isOn);
             player.specialSteps = 0;
         }
     }

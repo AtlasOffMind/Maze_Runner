@@ -47,7 +47,7 @@ namespace MazeRunner
             TM = FindFirstObjectByType<TurnManagement>();
 
 
-            // Bucle doble para instanciar cada celda en la cuadrícula del laberinto.
+            // Bucle for doble para instanciar cada celda en la cuadrícula correspondiente del laberinto.
             for (int x = 0; x < _MazeWidth; x++)
             {
                 for (int z = 0; z < _MazeDepth; z++)
@@ -231,7 +231,7 @@ namespace MazeRunner
 
         private void PuttingTramps()
         {
-            //Este for esta exclusivamente creado para poner aleatoriamente las trampas en el juego.
+            //Este "for" esta exclusivamente creado para poner aleatoriamente las trampas en el juego.
             for (int x = 2; x < _MazeWidth - 2; x++)
             {
                 for (int z = 2; z < _MazeDepth - 2; z++)

@@ -26,6 +26,5 @@ public class Joker : Ability
             player.CoolDown = CoolDown;
         
         }
-        else Debug.Log("Solo puedes usar esta habilidad si tienes menos de 5 HP ");
     }
 }

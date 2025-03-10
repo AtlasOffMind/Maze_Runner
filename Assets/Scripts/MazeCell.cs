@@ -41,7 +41,7 @@ namespace MazeRunner
         [SerializeField]
         public GameObject _MazeCellTrigger;
         // Propiedad pública de solo lectura que indica si la celda ha sido visitada.
-        public bool IsVisited; //{ get; public set; }
+        public bool IsVisited; 
 
         Renderer BackWallrender;
         Renderer FrontWallrender;
@@ -57,11 +57,11 @@ namespace MazeRunner
             _UnvisitedBlock.SetActive(false); // Oculta el bloque que indica que la celda no ha sido visitada.
 
 
-            _NormalFloor.SetActive(true); // 
-            _GreenSpike.SetActive(false); // 
-            _VioletHole.SetActive(false); // 
-            _InvisibleTrap.SetActive(false);//
-            _SelectionCube.SetActive(false); // 
+            _NormalFloor.SetActive(true);  
+            _GreenSpike.SetActive(false);  
+            _VioletHole.SetActive(false);  
+            _InvisibleTrap.SetActive(false);
+            _SelectionCube.SetActive(false); 
 
             BackWallrender = _BackWall.GetComponentInChildren<Renderer>();
             FrontWallrender = _FronttWall.GetComponentInChildren<Renderer>();
